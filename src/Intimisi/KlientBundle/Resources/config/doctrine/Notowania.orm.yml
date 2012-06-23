@@ -1,0 +1,38 @@
+Intimisi\KlientBundle\Entity\Notowania:
+  type: entity
+  table: null
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: IDENTITY
+    nazwa:
+      type: string
+      length: 255
+      unique: true
+    kurs_biezacy:
+      type: integer
+    zmiana_procentowa:
+      type: integer
+    zmiana_kwotowa:
+      type: integer
+    kurs_odniesienia:
+      type: integer
+    kurs_otwarcia:
+      type: integer
+    kurs_min:
+      type: integer
+    kurs_max:
+      type: integer
+    wolumen:
+      type: integer
+    obrot:
+      type: bigint
+    czas:
+      type: datetime
+  oneToMany:
+      portfel:
+        targetEntity: Intimisi\KlientBundle\Entity\Portfel
+        mappedBy: nazwa
+  lifecycleCallbacks: {  }

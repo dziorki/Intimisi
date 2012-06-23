@@ -1,0 +1,103 @@
+{% extends "::base.html.twig" %} 
+
+{% block content %}
+
+<div class="title"><h5>Ustawienia portfela inwestycyjnego</h5></div>
+
+{% if app.session.hasFlash('notice') %}
+        <div class="nNote nSuccess hideit">
+            <p>{{ app.session.flash('notice') }}</p>
+        </div>
+{% endif %}
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        {% for error in errors %}
+            <div class="nNote nFailure hideit">
+                <p>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</p>
+            </div>
+        {% endfor %}
+    {% endif %} 
+{% endspaceless %}
+{% endblock form_errors %}
+
+<form action="{{ path('ustawienia_update') }}" method="post" {{ form_enctype(form) }} id="valid" class="mainForm">
+    <fieldset>
+        <div class="widget">
+            <div class="head">
+                <h5 class="iLocked2">Konfiguracja prywatności</h5>
+            </div>    
+            <div class="rowElem noborder">
+                <label>Nazwa portfela:</label>
+                <div class="formRight">
+                    {{ form_widget(form.nazwa_portfela) }}
+                </div>                        
+                <div class="fix"></div>
+            </div>
+            <div class="rowElem">
+                <div class="leftRight">                      
+                    {{ form_widget(form.ustawienia_prywatnosci.0) }}               
+                    <label>{{ form_label(form.ustawienia_prywatnosci.0) }}</label>
+                </div>                       
+                <div class="fix"></div>
+            </div>
+            <div class="rowElem">
+                <div class="leftRight">                      
+                    {{ form_widget(form.ustawienia_prywatnosci.1) }}
+                    <label>{{ form_label(form.ustawienia_prywatnosci.1) }}</label>
+                </div>
+                <div class="fix"></div>
+            </div>
+            <div class="submitForm">
+                <input type="submit" value="Zapisz konfiguracje" class="greyishBtn">
+            </div>
+            <div class="fix"></div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <div class="widget">
+            <div class="head">
+                <h5 class="iAbacus">Ustawienia prowizji</h5>
+            </div>                    
+            <div class="rowElem">
+                <label>Wartość minimalna prowizji:</label>
+                <div class="formRight">
+                    {{ form_widget(form.ustawienia_prowizji_wartosc) }}
+                </div>                        
+                <div class="fix"></div>
+            </div>
+            <div class="rowElem">
+                <label>Wartość procentowa:</label>
+                <div class="formRight">
+                    {{ form_widget(form.ustawienia_prowizji_procent) }}
+                </div>                        
+                <div class="fix"></div>
+            </div>
+            <div class="submitForm">
+                <input type="submit" value="Zapisz konfiguracje" class="greyishBtn">
+            </div>
+            <div class="fix"></div>
+        </div>
+    </fieldset>  
+    <!--<fieldset>
+        <div class="widget">
+            <div class="head">
+                <h5 class="iRecord">Ustawienia avatara</h5>
+            </div>                    
+            <div class="rowElem">
+                <label>Avatar:</label>
+                <div class="formRight">
+                    {{ form_widget(form.avatar_file) }}
+                </div>                      
+                <div class="fix"></div>
+            </div>
+            {{ form_widget(form) }} 
+            <div class="submitForm">
+                <input type="submit" value="Wyślij" class="greyishBtn">
+            </div>
+            <div class="fix"></div>
+        </div>
+    </fieldset> 
+</form>
+-->
+{% endblock %}

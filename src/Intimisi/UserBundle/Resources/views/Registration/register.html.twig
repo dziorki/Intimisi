@@ -1,0 +1,56 @@
+{% extends "::logowanie.html.twig" %} 
+
+{% block content %}
+
+<div class="loginWrapper">
+{% if app.session.hasFlash('notice') %}
+        <div class="message">
+        {{ app.session.flash('notice') }}
+            </div>
+{% endif %}
+
+
+    <div class="loginPanel .registerPanel">
+        <div class="head"><h5 class="iUser">Rejestracja w portelu</h5></div>
+
+
+        <form action="{{ path('create') }}" method="post" {{ form_enctype(form) }} id="valid" class="mainForm">
+            <fieldset>
+                <div class="loginRow">
+                    <label for="req1">Użytkownik:</label>
+                    <div class="loginInput">{{ form_widget(form.user.username) }}</div>
+                    <div class="fix"></div>
+                </div>
+                <div class="loginRow">
+                    <label for="req2">Hasło:</label>
+                    <div class="loginInput">{{ form_widget(form.user.password.password) }}</div>
+                    <div class="fix"></div>
+                </div>
+                <div class="loginRow"> 
+                    <label for="req3">Powtórz:</label>
+                    <div class="loginInput">{{ form_widget(form.user.password.confirm) }}</div>
+                    <div class="fix"></div>
+                </div>
+                <div class="loginRow"> 
+                    <label for="req4">E-mail:</label>
+                    <div class="loginInput">{{ form_widget(form.user.email) }}</div>
+                    <div class="fix"></div>
+                </div>
+                <div class="loginRow"> 
+                    <label for="req10">Potwierdź:</label>
+                    <div class="loginInput">{{ form_widget(form.terms) }}</div>
+                    <div class="fix"></div>
+                </div>
+                {{ form_rest(form) }}     
+                    
+                <div class="loginRow">
+                    <div><label><a href="{{ path('index') }}">Wróc</a></label></div>
+                    <input type="submit" name="submit" value="Zarejestruj" class="greyishBtn submitForm" />
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

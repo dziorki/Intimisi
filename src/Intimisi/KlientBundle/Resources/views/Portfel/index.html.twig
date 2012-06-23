@@ -1,0 +1,207 @@
+{% extends "::base.html.twig" %} 
+{% block content %}
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+$(function () {
+    var previousPoint;
+ 
+
+    //Display horizontal graph
+    var d1_h = [];
+    var d2_h = [];
+    var i = 0
+
+            {% for entity in hBar %}
+                    d1_h.push([{{ entity.koszty }}]);
+                    d2_h.push([{{ entity.warte }}]);
+            {% endfor %}
+                
+    var ds_h = new Array();
+    ds_h.push({
+        label: 'Wartość w chwili zakupu',
+        data:d1_h,
+        bars: {
+            horizontal:true, 
+            show: true, 
+            barWidth: 1, 
+            order: 1,
+        }
+    });
+    ds_h.push({
+        label: 'Wartość teraz',
+        data:d2_h,
+        bars: {
+            horizontal:true, 
+            show: true, 
+            barWidth: 1, 
+            order: 2
+        }
+    });
+    
+    var data = [
+        {label: 'foo', data: [[1,300], [2,300], [3,300], [4,300], [5,300]]},
+        {label: 'bar', data: [[1,800], [2,600], [3,400], [4,200], [5,0]]},
+        {label: 'baz', data: [[1,100], [2,200], [3,300], [4,400], [5,500]]},
+    ];
+    var options = {
+        series: {stack: 0,
+                 lines: {show: false, steps: false },
+                 bars: {show: true, barWidth: 0.9, align: 'center',},},
+                legend: {
+                        show: true,
+                        noColumns: 1, // number of colums in legend table
+                        labelFormatter: null, // fn: string -> string
+                        labelBoxBorderColor: "#000", // border color for the little label boxes
+                        container: null, // container (as jQuery object) to put legend in, null means default on top of graph
+                        position: "ne", // position of default legend container within plot
+                        margin: [5, 10], // distance from grid edge to default legend container within plot
+                        backgroundColor: "#efefef", // null means auto-detect
+                        backgroundOpacity: 1 // set to 0 to avoid background
+                },
+        xaxis: {ticks: [[1,'One'], [2,'Two'], [3,'Three'], [4,'Four'], [5,'Five']]},
+    };
+
+
+    //tooltip function
+    function showTooltip(x, y, contents, areAbsoluteXY) {
+        var rootElt = 'body';
+	
+        $('<div id="tooltip3" class="tooltip">' + contents + '</div>').css( {
+            position: 'absolute',
+            display: 'none',
+            top: y - 35,
+            left: x - 5,
+            border: '1px solid #000',
+            border: '1px solid #000',
+            padding: '1px 6px',
+            'z-index': '9999',
+            'background-color': '#202020',
+            'color': '#fff',
+            'font-size': '11px',
+            'border-radius': '2px',
+            '-webkit-border-radius': '2px',
+            '-moz-border-radius': '2px',
+            opacity: 0.8
+        }).prependTo(rootElt).show();
+    }
+
+    $.plot($("#hBar"), data, options);
+});
+
+
+$(function () {
+        var data = [];              
+        {% for entity in entities %}
+            data[{{ loop.index0 }}] = { label: "{{ entity.nazwa }}", data: {{(entity.cena*entity.ilosc)/100}} }
+            {% endfor %}
+
+$.plot($("#pie"), data, 
+{
+                series: {
+                        pie: { 
+                                show: true,
+                                label: {
+                                        show: false,
+                                        formatter: function(label, series){
+                                                return '<div style="font-size:11px;text-align:center;padding:4px;color:white;">'+label+'<br/>'+Math.round(series.percent)+'%</div>';
+                                        },
+                                        threshold: 0.1
+                                }
+                        }
+                },
+                legend: {
+                        show: true,
+                        noColumns: 1, // number of colums in legend table
+                        labelFormatter: null, // fn: string -> string
+                        labelBoxBorderColor: "#000", // border color for the little label boxes
+                        container: null, // container (as jQuery object) to put legend in, null means default on top of graph
+                        position: "ne", // position of default legend container within plot
+                        margin: [5, 10], // distance from grid edge to default legend container within plot
+                        backgroundColor: "#efefef", // null means auto-detect
+                        backgroundOpacity: 1 // set to 0 to avoid background
+                },
+                grid: {
+                        hoverable: true,
+                        clickable: true
+                },
+});
+$("#interactive").bind("plothover", pieHover);
+$("#interactive").bind("plotclick", pieClick);
+
+});
+
+function pieHover(event, pos, obj) 
+{
+        if (!obj)
+                                return;
+        percent = parseFloat(obj.series.percent).toFixed(2);
+        $("#hover").html('<span style="font-weight: bold; color: '+obj.series.color+'">'+obj.series.label+' ('+percent+'%)</span>');
+}
+function pieClick(event, pos, obj) 
+{
+        if (!obj)
+                                return;
+        percent = parseFloat(obj.series.percent).toFixed(2);
+        alert(''+obj.series.label+': '+percent+'%');
+}
+//]]>
+</script>
+
+    <div class="title"><h5>Zawartość portfela inwestycyjnego</h5></div>
+
+    <div class="widget">
+        <div class="head"><h5 class="iFrames">Lista akcji</h5></div>
+        <table cellpadding="0" cellspacing="0" width="100%" class="tableStatic">
+            <thead>
+                <tr>
+                    <td>Lp.</td>
+                    <td>Nazwa</td>
+                    <td>Cena</td>
+                    <td>Ilosc</td>
+                    <td>Suma prowizji</td>
+                    <td>Cena akcji</td>
+                    <td>Akcje</td>
+                </tr>
+            </thead>
+            <tbody>
+        {% for entity in entities %}
+                    <tr>
+                        <td class="right">{{ loop.index0 + 1 }}</td>
+                        <td>{{ entity.nazwa }}</td>
+                        <td class="right">{{ (entity.cena/100)|number_format(2, '.', ',') }}</td>
+                        <td class="right">{{ entity.ilosc }}</td>
+                        <td class="right">{{ (entity.prowizja/100)|number_format(2, '.', ',') }}</td>
+                        <td class="right">{{ ((entity.cena*entity.ilosc)/100)|number_format(2, '.', ',') }}</td>
+                        <td class="center"><a href="{{ path('portfel_history') }}">pokaż historie</a></td>
+                    </tr>
+        {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="widgets">            
+            <div class="left">                
+                <div class="widget">
+                    <!-- Horizontal -->                    
+                    <div class="head"><h5 class="iStats">Zyski / Straty</h5></div>
+                    <div class="body">
+                        <div id="hBar" class="pieWidget"></div>
+                    </div>                
+                </div>
+            </div>
+            <div class="right">                
+                <div class="widget">
+                    <!-- Pie -->                    
+                    <div class="head"><h5 class="iChart8">Zawartość portfela</h5></div>
+                    <div class="body">                        
+                        <div id="pie" class="pieWidget"></div>
+                    </div>
+                </div>
+            </div>            
+            <div class="fix"></div>
+        </div>
+
+{% endblock %}

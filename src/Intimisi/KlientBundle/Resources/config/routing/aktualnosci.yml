@@ -1,0 +1,30 @@
+aktualnosci:
+    pattern:  /
+    defaults: { _controller: "KlientBundle:Aktualnosci:index" }
+
+aktualnosci_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "KlientBundle:Aktualnosci:show" }
+
+aktualnosci_new:
+    pattern:  /new
+    defaults: { _controller: "KlientBundle:Aktualnosci:new" }
+
+aktualnosci_create:
+    pattern:  /create
+    defaults: { _controller: "KlientBundle:Aktualnosci:create" }
+    requirements: { _method: post }
+
+aktualnosci_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "KlientBundle:Aktualnosci:edit" }
+
+aktualnosci_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "KlientBundle:Aktualnosci:update" }
+    requirements: { _method: post }
+
+aktualnosci_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "KlientBundle:Aktualnosci:delete" }
+    requirements: { _method: post }

@@ -1,0 +1,51 @@
+{% extends "::base.html.twig" %} 
+{% block content %}
+
+
+<div class="title"><h5>Portfel inwestycyjny</h5></div>
+<div class="stats">
+    <ul><li><a href="#" class="count grey" title="">{{ ilosc }}</a><span>ilość akcji</span></li>
+        <li><a href="#" class="count green" title="">{{ wzroslo }}</a><span>akcji wzrosło</span></li>
+        <li><a href="#" class="count red" title="">{{ zmalalo }}</a><span>akcji spadło</span></li>
+        <li class="last"><a href="#" class="count blue" title="">{{ bez_zmian }}</a><span>akcji bez zmian</span></li>
+    </ul>
+    <div class="fix"></div>  
+</div>
+
+<!-- Dynamic table --> 
+<div class="table"><div class="head">
+        <h5 class="iFrames">Notowania akcji</h5></div>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="notowania">
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Kurs bieżący</th>
+                <th>Zmiana procentowa</th>
+                <th>Zmiana kwotowa</th>
+                <th>Kurs otwarcia</th>
+                <th>Kurs min</th>
+                <th>Kurs max</th>
+                <th>Wolumen</th>
+                <th>Obrót</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for entity in entities %}
+            <tr class="{% if entity.zmianaKwotowa > 0 %}gradeU{% elseif entity.zmianaKwotowa == 0 %}gradeA{% else %}gradeX{% endif %}">
+                <td><a href="#">{{ entity.nazwa }}</a></td>
+                <td class="right" style="text-align: right">{{ entity.kursBiezacy/100 }}</td>
+                <td class="right" style="text-align: right">{{ entity.zmianaProcentowa/100 }}</td>
+                <td class="right" style="text-align: right">{{ entity.zmianaKwotowa/100 }}</td>
+                <td class="right" style="text-align: right">{{ entity.kursOtwarcia/100 }}</td>
+                <td class="right" style="text-align: right">{{ entity.kursMin/100 }}</td>
+                <td class="right" style="text-align: right">{{ entity.kursMax/100 }}</td>
+                <td class="right" style="text-align: right">{{ entity.wolumen }}</td>
+                <td class="right" style="text-align: right">{{ entity.obrot }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>  
+</div>
+<div class="fix"></div>
+{% endblock %}

@@ -1,0 +1,11 @@
+ustawienia:
+    pattern:  /
+    defaults: { _controller: "KlientBundle:Ustawienia:index" }
+    
+ustawienia_update_prowizja:
+    pattern:  /update_prowizja
+    defaults: { _controller: "KlientBundle:Ustawienia:updateProwizja" }
+    
+ustawienia_update:
+    pattern:  /update
+    defaults: { _controller: "KlientBundle:Ustawienia:update" }

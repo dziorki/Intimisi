@@ -1,0 +1,29 @@
+{% extends "::base.html.twig" %} 
+{% block content %}
+
+<div class="title"><h5>Ulubieni użytkownicy</h5></div>
+
+<div class="widget first">
+    <div class="head">
+        <h5 class="iUsers">Lista ulubionych użytkowników</h5>
+    </div>
+    <div id="myList-nav">
+        <div class="ln-letter-count" style="top: 0px; position: absolute; left: 992px; width: 19px; display: none; ">10</div>
+    </div>
+    <ul id="myList">
+        {% for entity in entities %}
+        <li class="ln-a" style="display: list-item; "><a href="#">{{ entity.ulubionyid }}</a>
+            <ul class="listData">
+                <li><a href="#" title="">email@domain.com</a></li>
+                <li><span class="red">+5488734455</span></li>
+                <li><span class="cNote">{{ entity.opis }}</span></li>
+                <li><span class="rowElem"><a href="">Usuń</a></span></li>
+            </ul>
+        </li>
+        {% endfor %}
+        <li class="ln-no-match" style="display: none; ">Nothing matched your filter, please click another letter.
+        </li>
+    </ul>
+</div>
+
+{% endblock %}

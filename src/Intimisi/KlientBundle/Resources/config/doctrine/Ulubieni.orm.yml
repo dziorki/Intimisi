@@ -1,0 +1,17 @@
+Intimisi\KlientBundle\Entity\Ulubieni:
+  type: entity
+  table: null
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    user_id:
+      type: integer
+    ulubiony_id:
+      type: integer
+    opis:
+      type: string
+      length: 255
+  lifecycleCallbacks: {  }

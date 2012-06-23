@@ -1,0 +1,53 @@
+{% extends "::base.html.twig" %} 
+{% block content %}
+
+<div class="title"><h5>Portfel inwestycyjny</h5></div>
+<fieldset>
+    <div class="widget">
+        <div class="head">
+            <h5 class="iLocked2">Konfiguracja</h5>
+        </div>                    
+        <div class="rowElem">
+            <label>Nazwa:</label>
+            <div class="formRight">
+            {{ entity.nazwa.nazwa }}
+            </div>                        
+            <div class="fix"></div>
+        </div>
+        <div class="rowElem">
+            <label>Cena akcji:</label>
+            <div class="formRight">
+            {{ entity.cena }}
+            </div>                        
+            <div class="fix"></div>
+        </div>
+        <div class="rowElem">
+            <label>Ilość zakupionych akcji:</label>
+            <div class="formRight">
+            {{ entity.ilosc }}
+            </div>                        
+            <div class="fix"></div>
+        </div>
+        <div class="rowElem">
+            <label>Prowizja:</label>
+            <div class="formRight">
+            {{ entity.prowizja }}
+            </div>                        
+            <div class="fix"></div>
+        </div>
+        <div class="submitForm">
+            
+            
+        <form action="{{ path('portfel_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <a href="{{ path('portfel_history') }}"><button class="greyishBtn">Cofnij</button></a>
+            <a href="{{ path('portfel_edit', { 'id': entity.id }) }}"><button class="greenBtn">Edytuj</button></a>
+            <button type="submit" class="redBtn">Usuń</button>
+        </form>
+            
+        </div>
+        <div class="fix"></div>
+    </div>
+</fieldset>  
+
+{% endblock %}

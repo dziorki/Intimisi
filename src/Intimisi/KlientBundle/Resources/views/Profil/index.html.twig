@@ -1,0 +1,49 @@
+{% extends "::base.html.twig" %} 
+{% block content %}
+
+
+<div class="title"><h5>Profil użytkownika</h5></div>
+
+<form action="" class="mainForm">
+    <fieldset>
+        <div class="widget">
+            <div class="head">
+                <h5 class="iLocked2">Ustawienia</h5>
+            </div>                    
+            <div class="rowElem noborder">
+                <label for="radioOne">Nazwa użytkownika:<span class="req">*</span></label>
+                <div class="formRight">
+                    {{ form_widget(form.username) }}       
+                </div>                        
+                <div class="fix"></div>
+            </div>
+            <div class="rowElem">
+                <label for="radioOne">E-mail:<span class="req">*</span></label>
+                <div class="formRight">
+                    {{ form_widget(form.email) }}       
+                </div>                        
+                <div class="fix"></div>                
+            </div>
+            <div class="rowElem">
+                <label for="radioOne">Hasło:<span class="req">*</span></label>
+                <div class="formRight">
+                    {{ form_widget(form.password.password) }}       
+                </div>                        
+                <div class="fix"></div>                  
+            </div>
+            <div class="rowElem">
+                <label for="radioOne">Powtórz hasło:<span class="req">*</span></label>
+                <div class="formRight">
+                    {{ form_widget(form.password.confirm) }}       
+                </div>                        
+                <div class="fix"></div>                  
+            </div>
+            <div class="submitForm">
+                <input type="submit" value="Zapisz ustawienia" class="greyishBtn">
+            </div>
+            <div class="fix"></div>
+        </div>
+    </fieldset>  
+</form>
+
+{% endblock %}

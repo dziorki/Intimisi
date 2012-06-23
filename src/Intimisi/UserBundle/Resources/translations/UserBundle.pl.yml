@@ -1,0 +1,4 @@
+security:
+    login:
+        confirm: Potwierdź
+        back: Wróć

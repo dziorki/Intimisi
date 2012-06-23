@@ -1,0 +1,38 @@
+portfel:
+    pattern:  /
+    defaults: { _controller: "KlientBundle:Portfel:index" }
+    
+portfel_history:
+    pattern:  /history
+    defaults: { _controller: "KlientBundle:Portfel:history" }
+
+portfel_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "KlientBundle:Portfel:show" }
+
+portfel_kup:
+    pattern:  /kup
+    defaults: { _controller: "KlientBundle:Portfel:kup" }
+    
+portfel_sprzedaj:
+    pattern:  /sprzedaj
+    defaults: { _controller: "KlientBundle:Portfel:sprzedaj" }
+
+portfel_create:
+    pattern:  /create
+    defaults: { _controller: "KlientBundle:Portfel:create" }
+    requirements: { _method: post }
+
+portfel_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "KlientBundle:Portfel:edit" }
+
+portfel_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "KlientBundle:Portfel:update" }
+    requirements: { _method: post }
+
+portfel_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "KlientBundle:Portfel:delete" }
+    requirements: { _method: post }

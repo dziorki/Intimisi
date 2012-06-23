@@ -1,0 +1,43 @@
+<!-- Left navigation -->
+<div class="leftNav"> <ul id="menu">
+        <li class="dash">
+            <a href="{{ path('index') }}" title="" {% if(app.request.get('_route') == 'index') %}class="active{% endif %}">
+                <span>Moje konto</span>
+            </a>
+        </li>
+        <li class="graphs">
+            <a href="{{ path('portfel') }}" title="" {% if(app.request.get('_route') == 'portfel') %}class="active{% endif %}">
+                <span>Portfel inwestycyjny</span>
+            </a>
+        </li>
+        <li class="forms">
+            <a href="#" title="" class="exp{% if(app.request.get('_route') in ['portfel_new', 'portfel_history', 'portfel_show', 'portfel_edit'] ) %} active{% endif %}">
+                <span>Operacje</span>
+                <span class="numberLeft">{{ operacje }}</span>
+            </a>
+            <ul class="sub">
+                <li><a href="{{ path('portfel_history') }}" title="">Przeglądaj operacje</a></li>
+                <li><a href="{{ path('portfel_kup') }}" title="">Kupno papierów</a></li>
+                <li><a href="{{ path('portfel_sprzedaj') }}" title="">Sprzedaż papierów</a></li>
+            </ul>
+        </li>
+        <li class="files"><a href="{{ path('wycena') }}" title=""><span>Wycena portfela</span></a></li>
+        <li class="typo"><a href="{{ path('kalkulator') }}" title=""><span>Kalkulator zysków i strat</span></a></li>
+        <li class="tables"><a href="{{ path('notowania') }}" title="" {% if(app.request.get('_route') == 'notowania') %}class="active{% endif %}"><span>Notowania</span></a></li>
+        <li class="cal"><a href="{{ path('portfel_history') }}" title=""><span>Kalendarz</span></a></li>
+        <li class="gallery"><a href="{{ path('ulubieni') }}" title=""><span>Obserwowani użytkownicy</span></a></li>
+        <li class="widgets"><a href="{{ path('ustawienia') }}" title="" {% if(app.request.get('_route') == 'ustawienia') %}class="active{% endif %}"><span>Konfiguracja</span></a></li>
+        <li class="errors"><a href="{{ path('komunikaty') }}" title="" class="exp"><span>Komunikaty</span><span class="numberLeft">6</span></a>
+            <ul class="sub">
+                <li><a href="403.html" title="">403 page</a></li>
+                <li><a href="404.html" title="">404 page</a></li>
+                <li><a href="405.html" title="">405 page</a></li>
+                <li><a href="500.html" title="">500 page</a></li>
+                <li><a href="503.html" title="">503 page</a></li>
+                <li class="last"><a href="offline.html" title="">Website is offline</a></li>
+            </ul>
+        </li>
+        <li class="contacts"><a href="{{ path('portfele') }}" title=""><span>Portfele użytkowników</span></a></li>
+        <li class="pic"><a href="{{ path('pomoc') }}" title=""><span>Pomoc</span></a></li>
+    </ul> 
+</div>

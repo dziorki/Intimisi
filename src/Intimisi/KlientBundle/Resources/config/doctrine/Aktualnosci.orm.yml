@@ -1,0 +1,18 @@
+Intimisi\KlientBundle\Entity\Aktualnosci:
+  type: entity
+  table: null
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    tytul:
+      type: string
+      length: 255
+    zawartosc:
+      type: text
+    slug:
+      type: string
+      length: 255
+  lifecycleCallbacks: {  }

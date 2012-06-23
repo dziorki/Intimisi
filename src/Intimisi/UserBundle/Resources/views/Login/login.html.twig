@@ -1,0 +1,45 @@
+{% extends "::logowanie.html.twig" %} 
+
+{% block content %}
+
+
+<div class="loginWrapper">
+        
+{% if error %}
+<div class="nNote nFailure hideit">
+    <p>{{ error|trans([], 'validators') }}</p>
+</div>
+{% endif %}
+{% if app.session.hasFlash('notice') %}
+<div class="nNote nSuccess hideit">
+    <p>{{ app.session.flash('notice') }}</p>
+</div>
+{% endif %}
+    
+    
+    <div class="loginPanel">
+        <div class="head"><h5 class="iUser">{{ 'security.login.welcome'|trans({}, 'FOSUserBundle') }}</h5></div>
+        <form action="{{ path('login_check') }}" method="POST" id="valid" class="mainForm">
+            <fieldset>
+                <div class="loginRow noborder">
+                    <label for="req1">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+                    <div class="loginInput"><input type="text" name="_username" value="{{ last_username }}" class="validate[required]" id="req1"></div>
+                    <div class="fix"></div>
+                </div>
+
+                <div class="loginRow">
+                    <label for="req2">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                    <div class="loginInput"><input type="password" name="_password" value="" class="validate[required]" id="req2"></div>
+                    <div class="fix"></div>
+                </div>
+
+                <div class="loginRow">
+                    <div ><label for="check2"><a href="{{ path('register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a></label></div>
+                    <input type="submit" name="submit" value="{{ 'layout.login'|trans({}, 'FOSUserBundle') }}" class="greyishBtn submitForm">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

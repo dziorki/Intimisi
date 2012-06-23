@@ -1,0 +1,47 @@
+notowania:
+    pattern:  /notowania
+    defaults: { _controller: "KlientBundle:Notowania:index" }
+
+profil:
+    pattern:  /profil
+    defaults: { _controller: "KlientBundle:Profil:index" }
+
+statystyki:
+    pattern:  /statystyki
+    defaults: { _controller: "KlientBundle:Profil:index" }
+
+kalkulator:
+    pattern:  /kalkulator
+    defaults: { _controller: "KlientBundle:Profil:index" }
+
+komunikaty:
+    pattern:  /komunikaty
+    defaults: { _controller: "KlientBundle:Profil:index" }
+
+pomoc:
+    pattern:  /pomoc
+    defaults: { _controller: "KlientBundle:Pomoc:index" }
+
+portfele:
+    pattern:  /portfele
+    defaults: { _controller: "KlientBundle:Portfele:index" }
+
+wycena:
+    pattern:  /wycena
+    defaults: { _controller: "KlientBundle:Wycena:index" }
+
+KlientBundle_ulubieni:
+    resource: "@KlientBundle/Resources/config/routing/ulubieni.yml"
+    prefix:   /ulubieni
+
+KlientBundlePortfel:
+    resource: "@KlientBundle/Resources/config/routing/portfel.yml"
+    prefix:   /portfel
+
+KlientBundleUstawienia:
+    resource: "@KlientBundle/Resources/config/routing/ustawienia.yml"
+    prefix:   /ustawienia
+    
+KlientBundleAktualnosci:
+    resource: "@KlientBundle/Resources/config/routing/aktualnosci.yml"
+    prefix:   /aktualnosci

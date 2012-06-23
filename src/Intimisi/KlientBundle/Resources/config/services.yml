@@ -1,0 +1,7 @@
+parameters:
+#    klient.example.class: Intimisi\KlientBundle\Example
+
+services:
+#    klient.example:
+#        class: %klient.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block title %}Portfel inwestycyjny logowanie{% endblock %}</title>
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/print.css') }}" media="print" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/reset.css') }}" media="screen" />
+        <link href="http://fonts.googleapis.com/css?family=Cuprum" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}" media="screen" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/switches.css') }}" media="screen" />
+        <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/forms/jquery.validationEngine-pl.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/forms/jquery.validationEngine.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/plugins/wizards/jquery.validate.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/login.js') }}"></script>
+    </head>
+    <body>
+
+    {% block content%}
+    {% endblock  %}
+
+
+    </body>
+</html>

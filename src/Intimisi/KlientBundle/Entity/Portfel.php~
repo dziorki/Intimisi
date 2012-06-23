@@ -1,0 +1,204 @@
+<?php
+
+namespace Intimisi\KlientBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
+ * @ORM\Table(name="portfel")
+ */
+class Portfel
+{
+    /**
+     * @var integer $id
+     */
+    private $id;
+
+    /**
+     * @var integer $cena
+     */
+    private $cena;
+
+    /**
+     * @var integer $ilosc
+     */
+    private $ilosc;
+
+    /**
+     * @var integer $prowizja
+     */
+    private $prowizja;
+
+    /**
+     * @var datetime $czas
+     */
+    private $czas;
+
+    /**
+     * @var Intimisi\KlientBundle\Entity\Notowania
+     */
+    private $nazwa;
+
+    /**
+     * @var Intimisi\LoginBundle\Entity\User
+     */
+    private $user_id;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set cena
+     *
+     * @param integer $cena
+     */
+    public function setCena($cena)
+    {
+        $this->cena = $cena;
+    }
+
+    /**
+     * Get cena
+     *
+     * @return integer 
+     */
+    public function getCena()
+    {
+        return $this->cena;
+    }
+
+    /**
+     * Set ilosc
+     *
+     * @param integer $ilosc
+     */
+    public function setIlosc($ilosc)
+    {
+        $this->ilosc = $ilosc;
+    }
+
+    /**
+     * Get ilosc
+     *
+     * @return integer 
+     */
+    public function getIlosc()
+    {
+        return $this->ilosc;
+    }
+
+    /**
+     * Set prowizja
+     *
+     * @param integer $prowizja
+     */
+    public function setProwizja($prowizja)
+    {
+        $this->prowizja = $prowizja;
+    }
+
+    /**
+     * Get prowizja
+     *
+     * @return integer 
+     */
+    public function getProwizja()
+    {
+        return $this->prowizja;
+    }
+
+    /**
+     * Set czas
+     *
+     * @param datetime $czas
+     */
+    public function setCzas($czas)
+    {
+        $this->czas = $czas;
+    }
+
+    /**
+     * Get czas
+     *
+     * @return datetime 
+     */
+    public function getCzas()
+    {
+        return $this->czas;
+    }
+
+    /**
+     * Set nazwa
+     *
+     * @param Intimisi\KlientBundle\Entity\Notowania $nazwa
+     */
+    public function setNazwa(\Intimisi\KlientBundle\Entity\Notowania $nazwa)
+    {
+        $this->nazwa = $nazwa;
+    }
+
+    /**
+     * Get nazwa
+     *
+     * @return Intimisi\KlientBundle\Entity\Notowania 
+     */
+    public function getNazwa()
+    {
+        return $this->nazwa;
+    }
+
+    /**
+     * Set user_id
+     *
+     * @param Intimisi\LoginBundle\Entity\User $userId
+     */
+    public function setUserId(\Intimisi\LoginBundle\Entity\User $userId)
+    {
+        $this->user_id = $userId;
+    }
+
+    /**
+     * Get user_id
+     *
+     * @return Intimisi\LoginBundle\Entity\User 
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+    /**
+     * @var Intimisi\KlientBundle\Entity\Notowania
+     */
+    private $notowania;
+
+
+    /**
+     * Set notowania
+     *
+     * @param Intimisi\KlientBundle\Entity\Notowania $notowania
+     */
+    public function setNotowania(\Intimisi\KlientBundle\Entity\Notowania $notowania)
+    {
+        $this->notowania = $notowania;
+    }
+
+    /**
+     * Get notowania
+     *
+     * @return Intimisi\KlientBundle\Entity\Notowania 
+     */
+    public function getNotowania()
+    {
+        return $this->notowania;
+    }
+}

@@ -1,0 +1,30 @@
+ulubieni:
+    pattern:  /
+    defaults: { _controller: "KlientBundle:Ulubieni:index" }
+
+ulubieni_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "KlientBundle:Ulubieni:show" }
+
+ulubieni_new:
+    pattern:  /new
+    defaults: { _controller: "KlientBundle:Ulubieni:new" }
+
+ulubieni_create:
+    pattern:  /create
+    defaults: { _controller: "KlientBundle:Ulubieni:create" }
+    requirements: { _method: post }
+
+ulubieni_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "KlientBundle:Ulubieni:edit" }
+
+ulubieni_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "KlientBundle:Ulubieni:update" }
+    requirements: { _method: post }
+
+ulubieni_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "KlientBundle:Ulubieni:delete" }
+    requirements: { _method: post }

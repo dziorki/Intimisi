@@ -1,0 +1,33 @@
+{% extends "::base.html.twig" %} 
+{% block content %}
+
+<div class="title"><h5>Lista portfeli użytkowników</h5></div>
+
+<!-- Dynamic table --> 
+<div class="table">
+    <div class="head">
+        <h5 class="iFrames">Portfele</h5></div>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="notowania">
+        <thead>
+        <tr>
+            <td>Lp.</td>
+            <td>Nazwa portfela</td>
+            <td>Zysk/Strata</td>
+            <td>Nazwa użytkownika</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+                <tr>
+                    <td class="right">{{ loop.index0 + 1 }}</td>
+                    <td>{{ entity.nazwa_portfela }}</td>
+                    <td class="right" style="text-align: right">{{ entity.zysk/100|number_format(2, '.', ',') }}</td>
+                    <td class="left">{{ entity.username }}</td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

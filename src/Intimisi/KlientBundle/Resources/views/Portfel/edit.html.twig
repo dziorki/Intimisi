@@ -1,0 +1,53 @@
+{% extends "::base.html.twig" %} 
+{% block content %}
+
+<div class="title"><h5>Portfel inwestycyjny</h5></div>
+
+<form action="{{ path('portfel_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} class="mainForm">
+   <fieldset>
+        <div class="widget">
+            <div class="head">
+                <h5 class="iLocked2">Konfiguracja</h5>
+            </div>                    
+            <div class="rowElem searchDrop">
+                <label>Nazwa:</label>
+                <div class="formRight">
+                    {{ form_widget(edit_form.nazwa) }}
+                </div>                        
+                <div class="fix"></div>
+            </div>
+            <div class="rowElem">
+                <label>Cena akcji:</label>
+                <div class="formRight">
+                    {{ form_widget(edit_form.cena) }}
+                </div>                        
+                <div class="fix"></div>
+            </div>
+            <div class="rowElem">
+                <label>Ilość:</label>
+                <div class="formRight">
+                    {{ form_widget(edit_form.ilosc) }}
+                </div>                        
+                <div class="fix"></div>
+            </div>
+            <div class="rowElem">
+                <label>Prowizja:</label>
+                <div class="formRight">
+                    {{ form_widget(edit_form.prowizja) }}
+                </div>                        
+                <div class="fix"></div>
+            </div>
+                
+            {{ form_rest(edit_form) }} 
+
+            <div class="submitForm">
+                <a href="{{ path('portfel_history') }}"><button class="greyishBtn">Cofnij</button></a>
+                <input type="submit" value="Edytuj zakup" class="greenBtn">
+            </div>
+            <div class="fix"></div>
+        </div>
+    </fieldset>  
+</form>
+
+
+{% endblock %}

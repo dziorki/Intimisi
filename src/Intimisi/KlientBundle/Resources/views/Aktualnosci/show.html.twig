@@ -1,0 +1,21 @@
+{% extends "::base.html.twig" %} 
+{% block content %}
+
+<div class="title"><h5>Aktualności</h5></div>
+<table class="record_properties">
+    <tbody>
+
+        <tr>
+            <th>Tytul</th>
+            <td>{{ entity.tytul }}</td>
+        </tr>
+        <tr>
+            <th>Zawartosc</th>
+            <td>{{ entity.zawartosc }}</td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+{% endblock %}

@@ -1,0 +1,34 @@
+Intimisi\KlientBundle\Entity\Portfel:
+  type: entity
+  repositoryClass: Intimisi\KlientBundle\Repository\PortfelRepository
+  table: null
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: IDENTITY
+    cena:
+      type: integer
+      nullable: TRUE
+      columnDefinition: integer NOT NULL DEFAULT 0
+    ilosc:
+      type: integer
+      nullable: TRUE
+      columnDefinition: integer NULL DEFAULT 0
+    prowizja:
+      type: integer
+      nullable: TRUE
+      columnDefinition: integer NOT NULL DEFAULT 0
+    czas:
+      type: datetime
+  manyToOne:
+      nazwa:
+        targetEntity: Intimisi\KlientBundle\Entity\Notowania
+        inversedBy: portfel
+      user_id:
+        targetEntity: Intimisi\UserBundle\Entity\User
+        joinColumn:
+          name: user_id
+          referencedColumnName: id
+  lifecycleCallbacks: {  }

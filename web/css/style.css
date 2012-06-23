@@ -1,0 +1,155 @@
+
+body {
+    color:#000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    /*    background: #86C9EF url('../images/background.jpg') bottom fixed repeat-x;*/
+    background: #86C9EF;
+}
+
+
+#username, #password {
+    padding: 12px 10px 12px 10px;
+    -webkit-border-radius: 6px; 
+    -moz-border-radius: 6px; 
+    border-radius: 6px;
+    border: 0;
+    width: 240px;
+    font-size: 14px;
+}
+
+
+input[type="submit"]:hover {
+    background-color:#d3d3d3;
+}
+
+input, textarea, select, .uneditable-input {
+    border: 1px solid #CCCCCC;
+    -webkit-border-radius: 6px; 
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    color: #555555;
+    display: inline-block;
+    font-size: 13px;
+    line-height: 18px;
+    padding: 4px;
+    width: 200px;
+    -moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    font-family:'PT Sans', Tahoma, Arial, sans-serif;
+    vertical-align: middle;
+}
+
+input:focus, textarea:focus {
+    border-color: rgba(82, 168, 236, 0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 2px rgba(82, 168, 236, 0.6);
+    outline: 0 none;
+}
+
+input.big {
+    font-size: 18px;
+    line-height: 25px;
+    padding: 8px;
+    width: 320px;
+    text-align: center;
+}
+
+div {
+    display: block;
+}
+
+.logo {
+    position: fixed;
+    top: 24px;
+    left:30px;
+    width: 254px;
+    height: 76px;
+    background-image: url('../images/logo.png');
+}
+
+.minecraft {
+    width:500px;
+    height: 600px;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    background-image: url('../images/minecraft.jpg');
+}
+
+.login-content {
+    position: absolute;
+    top: 7%;
+    right: 5%;
+}
+
+
+.username-field {
+    float:left;
+    margin: 10px 0 15px 0;
+}
+
+.password-field {
+    float:left;
+    margin: 10px 0 15px 0;
+
+}
+
+.label {
+    padding: 0 0 0 5px;
+    font: 11px verdana, sans-serif;
+    color: #484848;
+
+}
+
+.more {
+    float:left;
+    margin: 0 0 25px 0;
+    font: 11px verdana, sans-serif;
+    color: #0062bd
+
+}
+
+
+input[type="submit"]{
+    margin-top: 10px;
+    background-color: #333;
+    background: -moz-linear-gradient(bottom, #333, #444);
+    background: -ms-linear-gradient(bottom, #333, #444);
+    background: -o-linear-gradient(bottom, #333, #444);
+    background: -webkit-linear-gradient(bottom, #333, #444);
+    background: linear-gradient(bottom, #333, #444);
+    border: 1px solid #222; color: #fff; cursor: pointer; height: 35px; width: 110px;}
+
+input[type="submit"]:hover{
+    color: #ff6937;
+    text-shadow: 0 0 1px rgba(255,255,255,.2);
+}
+
+.message {
+    padding: 5px 0;
+    font: bold 10px verdana,sans-serif;
+    color: white;
+    text-align: center;
+    border-bottom: 1px solid #90DEFF;
+    background: #E2451C;
+}
+
+.good {
+    background: #03c900;
+}
+
+#menu {
+
+    padding: 50px 0;
+    font: bold 10px verdana,sans-serif;
+    color: white;
+    text-align: center;
+    border-bottom: 1px solid #90DEFF;
+    background: #535353;
+}
+
+#content {
+    width: 500px;
+    margin: 50px auto;
+
+}

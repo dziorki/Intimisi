@@ -1,0 +1,61 @@
+{% extends "::base.html.twig" %} 
+{% block content %}
+
+<div class="title"><h5>Kupno akcji</h5></div>
+
+
+
+
+<form action="{{ path('portfel_create') }}" method="post" {{ form_enctype(form) }} class="mainForm">
+    <fieldset>
+        <div class="widget">
+            <div class="head">
+                <h5 class="iLocked2">Ustawienia kupna</h5>
+            </div>                    
+            <div class="rowElem searchDrop">
+                <label>Nazwa:</label>
+                <div class="formRight">
+                    {{ form_widget(form.nazwa) }}
+                </div>                        
+                <div class="fix"></div>
+            </div>
+            <div class="rowElem">
+                <label>Cena akcji:</label>
+                <div class="formRight">
+                    {{ form_widget(form.cena) }}
+                </div>                        
+                <div class="fix"></div>
+            </div>
+            <div class="rowElem">
+                <label>Ilość:</label>
+                <div class="formRight">
+                    {{ form_widget(form.ilosc) }}
+                </div>                        
+                <div class="fix"></div>
+            </div>
+            <div class="rowElem">
+                <label>Prowizja:</label>
+                <div class="formRight">
+                    {{ form_widget(form.prowizja) }}
+                </div>                        
+                <div class="fix"></div>
+            </div>
+                
+
+{{ form_rest(form) }} 
+
+            <div class="submitForm">
+                <input type="submit" value="Kup" class="greyishBtn">
+            </div>
+            <div class="fix"></div>
+        </div>
+    </fieldset>  
+</form>
+
+
+
+
+
+{% endblock %}
+
+

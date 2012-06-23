@@ -1,0 +1,69 @@
+{% extends "::logowanie.html.twig" %} 
+
+{% block content %}
+
+<div class="loginWrapper">
+{% if app.session.hasFlash('notice') %}
+        <div class="message">
+        {{ app.session.flash('notice') }}
+            </div>
+{% endif %}
+
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        {% for error in errors %}
+        {% if error.messageTemplate != 'This value is already used' %}
+            <div class="nNote nFailure hideit">
+                <p>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</p>
+            </div>
+        {% endif %}
+        {% endfor %}
+    {% endif %} 
+{% endspaceless %}
+{% endblock form_errors %}
+
+    <div class="loginPanel .registerPanel">
+        <div class="head"><h5 class="iUser">{{ 'security.login.register'|trans({}, 'FOSUserBundle') }}</h5></div>
+
+
+        <form action="{{ path('create') }}" method="post" {{ form_enctype(form) }} id="valid" class="mainForm">
+            <fieldset>
+                <div class="loginRow">
+                    <label for="req1">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+                    <div class="loginInput">{{ form_widget(form.user.username) }}</div>
+                    <div class="fix"></div>
+                </div>
+                <div class="loginRow">
+                    <label for="req2">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                    <div class="loginInput">{{ form_widget(form.user.plainPassword.password) }}</div>
+                    <div class="fix"></div>
+                </div>
+                <div class="loginRow"> 
+                    <label for="req3">{{ 'fos_user_registration_form_plainPassword_second'|trans({}, 'FOSUserBundle') }}</label>
+                    <div class="loginInput">{{ form_widget(form.user.plainPassword.confirm) }}</div>
+                    <div class="fix"></div>
+                </div>
+                <div class="loginRow"> 
+                    <label for="req4">{{ 'fos_user_registration_form_email'|trans({}, 'FOSUserBundle') }}</label>
+                    <div class="loginInput">{{ form_widget(form.user.email) }}</div>
+                    <div class="fix"></div>
+                </div>
+                <div class="loginRow"> 
+                    <label for="req10">{{ 'security.login.confirm'|trans({}, 'UserBundle') }}</label>
+                    <div class="loginInput">{{ form_widget(form.terms) }}</div>
+                    <div class="fix"></div>
+                </div>
+                {{ form_rest(form) }}     
+                    
+                <div class="loginRow">
+                    <div><label><a href="{{ path('index') }}">{{ 'security.login.back'|trans({}, 'UserBundle') }}</a></label></div>
+                    <input type="submit" name="submit" value="{{ 'layout.register'|trans({}, 'FOSUserBundle') }}" class="greyishBtn submitForm" />
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

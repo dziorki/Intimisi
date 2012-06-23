@@ -1,0 +1,26 @@
+<!-- Top navigation bar -->
+<div id="topNav"> <div class="fixed">  
+        <div class="wrapper"><div class="welcome"><a href="#" title="">
+                    <img src="{{ asset('images/userPic.png') }}" alt="" /></a>
+                <span>Dzień dobry, {{ app.user.username }}!</span></div>
+            <div class="userNav">
+                <ul>
+                    <li><a href="{{ path('profil') }}" title=""><img src="{{ asset('images/icons/topnav/profile.png') }}" alt="" /><span>Profil użytkownika</span></a></li>
+                    <li><a href="{{ path('notowania') }}" title=""><img src="{{ asset('images/icons/topnav/tasks.png') }}" alt="" /><span>Notowania akcji</span></a></li>
+                    <li class="dd"><a title=""><img src="{{ asset('images/icons/topnav/messages.png') }}" alt="" /><span>Wiadomości</span><span class="numberTop blue">8</span></a>
+                        <ul class="menu_body">
+                            <li><a href="#" title="" class="sAdd">nowa wiadomość</a></li>
+                            <li><a href="#" title="" class="sInbox">przychodzące</a></li>
+                            <li><a href="#" title="" class="sOutbox">wychodzące</a></li>
+                            <li><a href="#" title="" class="sTrash">kosz</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{{ path('ustawienia') }}" title=""><img src="{{ asset('images/icons/topnav/settings.png') }}" alt="" /><span>Ustawienia</span></a></li>
+                    <li><a href="{{ path('logout') }}" title=""><img src="{{ asset('images/icons/topnav/logout.png') }}" alt="" /><span>Wyloguj</span></a></li>
+                </ul>
+            </div>
+            <div class="fix"></div>
+        </div> 
+    </div>
+
+</div>
