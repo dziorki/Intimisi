@@ -10,9 +10,7 @@ class UstawieniaType extends AbstractType {
     public function buildForm(FormBuilder $builder, array $options) {
         $builder
                 ->add('ustawienia_prowizji_wartosc')
-                ->add('ustawienia_prowizji_procent', 'percent', array(
-//                    'attr' => (array('class' => 'maskPct validate[required]'))
-                ))
+                ->add('ustawienia_prowizji_procent', 'percent')
                 ->add('nazwa_portfela', 'text', array(
                     'attr' => array('class' => 'validate[required]')
                 ))
@@ -21,12 +19,7 @@ class UstawieniaType extends AbstractType {
                     'required' => true,
                     'expanded' => true,
                     'attr' => (array('class' => 'validate[required]')),
-                ))
-                ->add('avatar_file', 'file', array(
-                    'attr' => (array('class' => 'fileInput')),
-                    'required' => false
-                ))
-                ;
+                ));
 
 
 

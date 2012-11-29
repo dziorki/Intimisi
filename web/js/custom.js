@@ -23,9 +23,13 @@ $(function() {
     
 
 
-    $("#intimisi_klientbundle_portfeltype_cena").spinner({stepping: '0.25'});
+    $("#intimisi_klientbundle_portfeltype_cena").spinner({
+        stepping: '0.25'
+    });
     $("#intimisi_klientbundle_portfeltype_ilosc").spinner();
-    $("#intimisi_klientbundle_portfeltype_prowizja").spinner({stepping: '0.25'});
+    $("#intimisi_klientbundle_portfeltype_prowizja").spinner({
+        stepping: '0.25'
+    });
 
 
     //$("#intimisi_klientbundle_portfeltype_ilosc").
@@ -457,72 +461,7 @@ $(function() {
 
 
 
-    //===== Calendar =====//
 
-    var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
-	
-    $('#calendar').fullCalendar({
-        header: {
-            left: 'prev,next',
-            center: 'title',
-            right: 'month,basicWeek,basicDay'
-        },
-        editable: true,
-        events: [
-        {
-            title: 'All day event',
-            start: new Date(y, m, 1)
-        },
-        {
-            title: 'Long event',
-            start: new Date(y, m, 5),
-            end: new Date(y, m, 8)
-        },
-        {
-            id: 999,
-            title: 'Repeating event',
-            start: new Date(y, m, 2, 16, 0),
-            end: new Date(y, m, 3, 18, 0),
-            allDay: false
-        },
-        {
-            id: 999,
-            title: 'Repeating event',
-            start: new Date(y, m, 9, 16, 0),
-            end: new Date(y, m, 10, 18, 0),
-            allDay: false
-        },
-        {
-            title: 'Actually any color could be applied for background',
-            start: new Date(y, m, 30, 10, 30),
-            end: new Date(y, m, d+1, 14, 0),
-            allDay: false,
-            color: '#B55D5C'
-        },
-        {
-            title: 'Lunch',
-            start: new Date(y, m, 14, 12, 0),
-            end: new Date(y, m, 15, 14, 0),
-            allDay: false
-        },
-        {
-            title: 'Birthday PARTY',
-            start: new Date(y, m, 18),
-            end: new Date(y, m, 20),
-            allDay: false
-        },
-        {
-            title: 'Click for Google',
-            start: new Date(y, m, 27),
-            end: new Date(y, m, 29),
-            url: 'http://google.com/'
-        }
-        ]
-    });
-	
 	
 
 	

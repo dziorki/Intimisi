@@ -14,7 +14,9 @@ class PortfelType extends AbstractType {
                     'attr' => array('data-placeholder' => 'Wybierz akcje...', 'class' => 'chzn-select', 'tabindex' => '2', 'style' => 'width:200px;'),
                     'property' => 'nazwa'))
                 ->add('cena','text')
-                ->add('ilosc','text')
+                ->add('ilosc','text', array(
+                    'attr' => array('class' => 'validate[required,custom[integer],min[1]]'),
+                ))
                 ->add('prowizja','text')
 
 

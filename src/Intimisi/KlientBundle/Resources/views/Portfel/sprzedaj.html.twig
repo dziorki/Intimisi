@@ -1,12 +1,78 @@
 {% extends "::base.html.twig" %} 
 {% block content %}
 
+<script type="text/javascript">
+//<![CDATA[
+
+$(document).ready(function(){
+
+    var min = {{min}};
+    var procent = {{procent}};
+    var cena = $('#intimisi_klientbundle_portfeltype_cena');
+    var ilosc = $('#intimisi_klientbundle_portfeltype_ilosc');
+    var prowizja = $('#intimisi_klientbundle_portfeltype_prowizja');
+    var submit = $('input[type="submit"]');
+    var nazwa = $('#intimisi_klientbundle_portfeltype_nazwa');
+    var ilosci = $('#ilosc');
+    cena.click(function(){
+        sum();
+    });
+    ilosc.click(function(){
+        sum();
+    });
+    prowizja.click(function(){
+        sum();
+    });
+    submit.click(function(){
+        sum();
+        ajaks();
+    });
+
+
+    function sum(){
+        var tmp = cena.val().replace(',','')*ilosc.val().replace(',','')*procent/100;
+        if(tmp < min){
+            prowizja.val(min.toFixed(2));
+        } else {
+            prowizja.val(tmp.toFixed(2));
+        }
+    }
+    nazwa.change(function(){
+        ajaks();
+    });
+    
+    function ajaks() {
+
+        $.ajax({
+            url: '{{ path('portfel_ajax') }}',
+            dataType: 'json',
+            data: { 
+                action: 'sprzedaj',
+                id: nazwa.find('option:selected').val()
+            },
+            type: 'post',
+            success: function(output) {
+                cena.val(output.notowania.kurs_biezacy);
+                ilosci.html(output.portfel.ilosc);
+                ilosc.attr('class', 'validate[required,custom[integer],min[1],max['+output.portfel.ilosc+']] ui-spinner-box');
+                
+            }
+        });
+        
+    }
+
+});
+
+//]]>
+</script>
+
+
 <div class="title"><h5>Sprzedaż akcji</h5></div>
 
 
 
 
-<form action="{{ path('portfel_create') }}" method="post" {{ form_enctype(form) }} id="valid" class="mainForm">
+<form action="{{ path('portfel_sell') }}" method="post" {{ form_enctype(form) }} id="valid" class="mainForm">
     <fieldset>
         <div class="widget">
             <div class="head">
@@ -30,7 +96,7 @@
                 <label>Ilość:</label>
                 <div class="formRight">
                     {{ form_widget(form.ilosc) }}
-                    <span class="formNote">Dostępna ilość 123123</span>
+                    <span class="formNote">Dostępna ilość <i id="ilosc">0</i></span>
                 </div>                        
                 <div class="fix"></div>
             </div>
@@ -46,7 +112,7 @@
 {{ form_rest(form) }} 
 
             <div class="submitForm">
-                <input type="submit" value="Kup" class="greyishBtn">
+                <input type="submit" value="Sprzedaj" class="greyishBtn">
             </div>
             <div class="fix"></div>
         </div>

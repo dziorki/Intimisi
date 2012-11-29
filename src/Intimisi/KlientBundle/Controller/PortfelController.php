@@ -25,7 +25,7 @@ class PortfelController extends Controller {
 
         $this->_userId = $this->get('security.context')->getToken()->getUser()->getId();
         $entities = $em->getRepository('KlientBundle:Portfel')->findAllGrouped($this->_userId);
-        
+
         $hBar = $em->getRepository('KlientBundle:Portfel')->hBarPortfel($this->_userId);
 
         return $this->render('KlientBundle:Portfel:index.html.twig', array(
@@ -43,6 +43,21 @@ class PortfelController extends Controller {
 
         $this->_userId = $this->get('security.context')->getToken()->getUser()->getId();
         $entities = $em->getRepository('KlientBundle:Portfel')->findBy(array('user_id' => $this->_userId));
+
+        return $this->render('KlientBundle:Portfel:history.html.twig', array(
+                    'entities' => $entities
+                ));
+    }
+
+    /**
+     * Lists all Portfel entities.
+     *
+     */
+    public function oneAction($id) {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $this->_userId = $this->get('security.context')->getToken()->getUser()->getId();
+        $entities = $em->getRepository('KlientBundle:Portfel')->findBy(array('user_id' => $this->_userId, 'nazwa' => $id));
 
         return $this->render('KlientBundle:Portfel:history.html.twig', array(
                     'entities' => $entities
@@ -78,10 +93,37 @@ class PortfelController extends Controller {
         $entity = new Portfel();
         $form = $this->createForm(new PortfelType(), $entity);
 
+        $em = $this->getDoctrine()->getEntityManager();
+        $user = $em->getRepository('UserBundle:User')->find($this->get('security.context')->getToken()->getUser()->getId());
+
         return $this->render('KlientBundle:Portfel:kup.html.twig', array(
                     'entity' => $entity,
-                    'form' => $form->createView()
+                    'form' => $form->createView(),
+                    'procent' => $user->getUstawieniaProwizjiProcent() == null ? 0 : $user->getUstawieniaProwizjiProcent(),
+                    'min' => $user->getUstawieniaProwizjiWartosc() == null ? 0 : $user->getUstawieniaProwizjiWartosc()
                 ));
+    }
+
+    public function ajaxAction() {
+
+        $request = $this->getRequest();
+        $em = $this->getDoctrine()->getEntityManager();
+
+        switch ($request->get('action')) {
+            case 'kup':
+                $notowania = $em->getRepository('KlientBundle:Notowania')->find($request->get('id'));
+                $this->_userId = $this->get('security.context')->getToken()->getUser()->getId();
+                echo json_encode(array('notowania' => $notowania->jsonSerialize()));
+                break;
+            case 'sprzedaj':
+                $notowania = $em->getRepository('KlientBundle:Notowania')->find($request->get('id'));
+                $this->_userId = $this->get('security.context')->getToken()->getUser()->getId();
+                $portfel = $em->getRepository('KlientBundle:Portfel')->getAkcja($this->_userId, $notowania->getId());
+                echo json_encode(array('notowania' => $notowania->jsonSerialize(), 'portfel' => $portfel[0]));
+                break;
+        }
+
+        die;
     }
 
     /**
@@ -97,6 +139,39 @@ class PortfelController extends Controller {
         $entity->setUserId($user);
 
         $form = $this->createForm(new PortfelSprzedajType(), $entity);
+
+        return $this->render('KlientBundle:Portfel:sprzedaj.html.twig', array(
+                    'entity' => $entity,
+                    'form' => $form->createView(),
+                    'procent' => $user->getUstawieniaProwizjiProcent() == null ? 0 : $user->getUstawieniaProwizjiProcent(),
+                    'min' => $user->getUstawieniaProwizjiWartosc() == null ? 0 : $user->getUstawieniaProwizjiWartosc()
+                ));
+    }
+
+    /**
+     * Sell a new Portfel entity.
+     *
+     */
+    public function sellAction() {
+
+        $entity = new Portfel();
+        $request = $this->getRequest();
+        $form = $this->createForm(new PortfelType(), $entity);
+        $form->bindRequest($request);
+
+
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $userId = $this->get('security.context')->getToken()->getUser()->getId();
+            $user = $em->getRepository('Intimisi\UserBundle\Entity\User')->find($userId);
+            $entity->setUserId($user);
+            $entity->setIlosc($entity->getIlosc() * -1);
+            $em->persist($entity);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('portfel_show', array('id' => $entity->getId())));
+        }
 
         return $this->render('KlientBundle:Portfel:sprzedaj.html.twig', array(
                     'entity' => $entity,
@@ -138,6 +213,8 @@ class PortfelController extends Controller {
      */
     public function editAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
+        $userId = $this->get('security.context')->getToken()->getUser()->getId();
+        $user = $em->getRepository('Intimisi\UserBundle\Entity\User')->find($userId);
 
         $entity = $em->getRepository('KlientBundle:Portfel')->find($id);
 
@@ -152,6 +229,8 @@ class PortfelController extends Controller {
                     'entity' => $entity,
                     'edit_form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView(),
+                    'procent' => $user->getUstawieniaProwizjiProcent() == null ? 0 : $user->getUstawieniaProwizjiProcent(),
+                    'min' => $user->getUstawieniaProwizjiWartosc() == null ? 0 : $user->getUstawieniaProwizjiWartosc()
                 ));
     }
 

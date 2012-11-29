@@ -8,11 +8,15 @@ profil:
 
 statystyki:
     pattern:  /statystyki
-    defaults: { _controller: "KlientBundle:Profil:index" }
+    defaults: { _controller: "KlientBundle:Profil:statystyki" }
 
 kalkulator:
     pattern:  /kalkulator
     defaults: { _controller: "KlientBundle:Profil:index" }
+
+kalendarz:
+    pattern:  /kalendarz
+    defaults: { _controller: "KlientBundle:Kalendarz:index" }
 
 komunikaty:
     pattern:  /komunikaty

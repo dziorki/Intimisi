@@ -1,6 +1,44 @@
 {% extends "::base.html.twig" %} 
 {% block content %}
+<script type="text/javascript">
+//<![CDATA[
 
+$(document).ready(function(){
+
+    var min = {{min}};
+    var procent = {{procent}};
+    var cena = $('#intimisi_klientbundle_portfeltype_cena');
+    var ilosc = $('#intimisi_klientbundle_portfeltype_ilosc');
+    var prowizja = $('#intimisi_klientbundle_portfeltype_prowizja');
+    var submit = $('input[type="submit"]');
+
+    cena.click(function(){
+        sum();
+    });
+    ilosc.click(function(){
+        sum();
+    });
+    prowizja.click(function(){
+        sum();
+    });
+    submit.click(function(){
+        sum();
+    });
+
+
+    function sum(){
+        var tmp = cena.val().replace(',','')*ilosc.val().replace(',','')*procent/100;
+        if(tmp < min){
+            prowizja.val(min.toFixed(2));
+        } else {
+            prowizja.val(tmp.toFixed(2));
+        }
+    }
+
+});
+
+//]]>
+</script>
 <div class="title"><h5>Portfel inwestycyjny</h5></div>
 
 <form action="{{ path('portfel_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} class="mainForm">

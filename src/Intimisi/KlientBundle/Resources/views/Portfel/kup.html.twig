@@ -4,8 +4,67 @@
 <div class="title"><h5>Kupno akcji</h5></div>
 
 
+<script type="text/javascript">
+//<![CDATA[
+
+$(document).ready(function(){
+
+    var min = {{min}};
+    var procent = {{procent}};
+    var cena = $('#intimisi_klientbundle_portfeltype_cena');
+    var ilosc = $('#intimisi_klientbundle_portfeltype_ilosc');
+    var prowizja = $('#intimisi_klientbundle_portfeltype_prowizja');
+    var submit = $('input[type="submit"]');
+    var nazwa = $('#intimisi_klientbundle_portfeltype_nazwa');
+    cena.click(function(){
+        sum();
+    });
+    ilosc.click(function(){
+        sum();
+    });
+    prowizja.click(function(){
+        sum();
+    });
+    submit.click(function(){
+        sum();
+        ajaks();
+    });
 
 
+    function sum(){
+        var tmp = cena.val().replace(',','')*ilosc.val().replace(',','')*procent/100;
+        if(tmp < min){
+            prowizja.val(min.toFixed(2));
+        } else {
+            prowizja.val(tmp.toFixed(2));
+        }
+    }
+    
+    nazwa.change(function(){
+        ajaks();
+    });
+    
+    function ajaks() {
+
+        $.ajax({
+            url: '{{ path('portfel_ajax') }}',
+            dataType: 'json',
+            data: { 
+                action: 'kup',
+                id: nazwa.find('option:selected').val()
+            },
+            type: 'post',
+            success: function(output) {
+                cena.val(output.notowania.kurs_biezacy);
+            }
+        });
+        
+    }
+
+});
+
+//]]>
+</script>
 <form action="{{ path('portfel_create') }}" method="post" {{ form_enctype(form) }} class="mainForm">
     <fieldset>
         <div class="widget">

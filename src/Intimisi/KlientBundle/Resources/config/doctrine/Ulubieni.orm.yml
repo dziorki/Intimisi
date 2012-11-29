@@ -9,9 +9,13 @@ Intimisi\KlientBundle\Entity\Ulubieni:
         strategy: AUTO
     user_id:
       type: integer
-    ulubiony_id:
-      type: integer
     opis:
       type: string
       length: 255
+  manyToOne:
+      ulubiony_id:
+        targetEntity: Intimisi\UserBundle\Entity\User
+        joinColumn:
+          name: ulubiony_id
+          referencedColumnName: id
   lifecycleCallbacks: {  }

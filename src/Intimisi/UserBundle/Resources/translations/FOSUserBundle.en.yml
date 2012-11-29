@@ -12,7 +12,7 @@ group:
         deleted: The group has been deleted
 
 # Security
-"Bad credentials": Invalid username or password
+"The presented password is invalid.": Invalid username or password
 
 security:
     login:

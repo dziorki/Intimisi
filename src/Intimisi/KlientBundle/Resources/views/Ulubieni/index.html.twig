@@ -12,12 +12,12 @@
     </div>
     <ul id="myList">
         {% for entity in entities %}
-        <li class="ln-a" style="display: list-item; "><a href="#">{{ entity.ulubionyid }}</a>
+        <li class="ln-a" style="display: list-item; "><a href="#">{{ entity.ulubionyid.nazwaportfela}}</a>
             <ul class="listData">
-                <li><a href="#" title="">email@domain.com</a></li>
-                <li><span class="red">+5488734455</span></li>
+                <li><a href="#" title="">{{ entity.ulubionyid.email }}</a></li>
+                <li><span class="red">{{ entity.ulubionyid }}</span></li>
                 <li><span class="cNote">{{ entity.opis }}</span></li>
-                <li><span class="rowElem"><a href="">Usuń</a></span></li>
+                <li><span class="rowElem"><a href="{{ path('ulubieni_delete', {'id' : entity.id}) }}">Usuń</a></span></li>
             </ul>
         </li>
         {% endfor %}

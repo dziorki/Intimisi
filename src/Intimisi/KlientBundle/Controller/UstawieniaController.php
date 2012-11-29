@@ -3,7 +3,6 @@
 namespace Intimisi\KlientBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Intimisi\KlientBundle\Entity\Ustawienia;
 use Intimisi\KlientBundle\Form\UstawieniaType;
 use Intimisi\KlientBundle\Form\UstawieniaProwizjaType;
 use \Doctrine\Common\Util\Debug;
@@ -95,12 +94,12 @@ class UstawieniaController extends Controller {
         $request = $this->getRequest();
         $editForm->bindRequest($request);
 
-        if ($editForm->isValid()) {
+        //if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
             $this->get('session')->setFlash('notice', 'Dane zostały zapisane poprawnie.');
             return $this->redirect($this->generateUrl('ustawienia'));
-        }
+        //}
 
         $validator = $this->get('validator');
         $errors = $validator->validate($editForm);

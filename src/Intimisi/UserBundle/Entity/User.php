@@ -63,16 +63,16 @@ class User extends BaseUser {
      */
     protected $ustawieniaPrywatnosci;
 
-    /**
-     * @ORM\Column(type="string", length="255", name="avatar_path", nullable=true)
-     * @var string 
-     */
-    protected $avatarPath;
-
-    /**
-     * @Assert\File(maxSize="6000000") 
-     */
-    protected $avatarFile;
+//    /**
+//     * @ORM\Column(type="string", length="255", name="avatar_path", nullable=true)
+//     * @var string 
+//     */
+//    protected $avatarPath;
+//
+//    /**
+//     * @Assert\File(maxSize="6000000") 
+//     */
+//    protected $avatarFile;
 
     
     /**
@@ -192,20 +192,20 @@ class User extends BaseUser {
         $this->ustawieniaPrywatnosci = $ustawieniaPrywatnosci;
     }
 
-    public function getAvatarPath() {
-        return $this->avatarPath;
-    }
-
-    public function setAvatarPath($avatarPath) {
-        $this->avatarPath = $avatarPath;
-    }
-
-    public function getAvatarFile() {
-        return $this->avatarFile;
-    }
-
-    public function setAvatarFile($avatarFile) {
-        $this->avatarFile = $avatarFile;
-    }
+//    public function getAvatarPath() {
+//        return $this->avatarPath;
+//    }
+//
+//    public function setAvatarPath($avatarPath) {
+//        $this->avatarPath = $avatarPath;
+//    }
+//
+//    public function getAvatarFile() {
+//        return $this->avatarFile;
+//    }
+//
+//    public function setAvatarFile($avatarFile) {
+//        $this->avatarFile = $avatarFile;
+//    }
 
 }

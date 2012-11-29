@@ -5,6 +5,10 @@ portfel:
 portfel_history:
     pattern:  /history
     defaults: { _controller: "KlientBundle:Portfel:history" }
+    
+portfel_history_one:
+    pattern:  /history/{id}
+    defaults: { _controller: "KlientBundle:Portfel:one" }
 
 portfel_show:
     pattern:  /{id}/show
@@ -23,6 +27,11 @@ portfel_create:
     defaults: { _controller: "KlientBundle:Portfel:create" }
     requirements: { _method: post }
 
+portfel_sell:
+    pattern:  /sell
+    defaults: { _controller: "KlientBundle:Portfel:sell" }
+    requirements: { _method: post }
+
 portfel_edit:
     pattern:  /{id}/edit
     defaults: { _controller: "KlientBundle:Portfel:edit" }
@@ -36,3 +45,9 @@ portfel_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "KlientBundle:Portfel:delete" }
     requirements: { _method: post }
+
+portfel_ajax:
+    pattern:  /ajax
+    defaults: { _controller: "KlientBundle:Portfel:ajax" }
+    requirements: { _method: post }
+

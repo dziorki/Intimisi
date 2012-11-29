@@ -1,0 +1,59 @@
+{% extends "::base.html.twig" %} 
+{% block content %}
+
+<div class="title"><h5>Historia operacji</h5></div>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+$(document).ready(function(){
+
+    //===== Calendar =====//
+
+    var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
+	
+    $('#calendar').fullCalendar({
+        monthNames:["Styczeń","Luty","Marzec","Kwiecień","Maj","Czerwiec","Lipiec","Sierpień","Wrzesień","Październik","Listopad","Grudzień"],
+        monthNamesShort:["Sty","Lut","Mar","Kwi","Maj","Cze","Lip","Sie","Wrz","Paź","Lis","Gru"],
+        dayNames:["Niedziela","Poniedziałek","Wtorek","Środa","Czwartek","Piątek","Sobota"],
+        dayNamesShort:["Nie","Pon","Wto","Śro","Czw","Pią","Sob"],
+        buttonText:{month:"miesiąc",week:"tydzień",day:"dzień"},
+        header: {
+            left: 'prev,next',
+            center: 'title',
+            right: 'month,basicWeek,basicDay'
+        },
+        editable: true,
+        events: [
+        {% for entity in entities %}
+
+        {
+            title: '{{ entity.nazwa.nazwa }}',
+            
+            start: new Date({{ entity.czas|date('Y, m-1, d, H, i, s') }}),
+            end: new Date({{ entity.czas|date('Y, m-1, d, H, i, s') }}),
+            allDay: true
+        },
+
+        {% endfor %}   
+
+        ]
+    });
+});
+//]]>
+</script>
+
+<div class="widget first">
+    <div class="head"><h5 class="iDayCalendar">Kalendarz</h5></div>
+    <div id="calendar" class="fc">
+
+    </div>
+
+</div>
+
+
+{% endblock %}

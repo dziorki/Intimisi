@@ -1,16 +1,37 @@
-<h1>Ulubieni creation</h1>
+{% extends "::base.html.twig" %} 
+{% block content %}
 
-<form action="{{ path('ulubieni_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
+<div class="title"><h5>Portfel inwestycyjny</h5></div>
+
+
+<form action="{{ path('ulubieni_create') }}" method="post" {{ form_enctype(form) }} class="mainForm">
+    <fieldset>
+        <div class="widget">
+            <div class="head">
+                <h5 class="iUser2">Konfiguracja</h5>
+            </div>
+                
+            <div class="rowElem noborder">
+                <label>{{ form_label(form.opis) }}</label>
+                <div class="formRight">
+                    {{ form_widget(form.opis) }}
+                </div>                        
+                <div class="fix"></div>
+            </div>
+            <div class="rowElem searchDrop">
+                <label>Nazwa użytkownika:</label>
+                <div class="formRight">
+                    {{ form_widget(form.ulubiony_id) }}
+                </div>                        
+                <div class="fix"></div>
+            </div>
+            {{ form_widget(form) }} 
+            <div class="submitForm">
+                <button type="submit">Dodaj</button>
+            </div>
+            <div class="fix"></div>
+        </div>
+    </fieldset>  
 </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('ulubieni') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+{% endblock %}

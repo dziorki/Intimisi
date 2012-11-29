@@ -22,21 +22,19 @@
             </ul>
         </li>
         <li class="files"><a href="{{ path('wycena') }}" title=""><span>Wycena portfela</span></a></li>
-        <li class="typo"><a href="{{ path('kalkulator') }}" title=""><span>Kalkulator zysków i strat</span></a></li>
+        <li class="typo"><a href="{{ path('statystyki') }}" title=""><span>Kalkulator zysków i strat</span></a></li>
         <li class="tables"><a href="{{ path('notowania') }}" title="" {% if(app.request.get('_route') == 'notowania') %}class="active{% endif %}"><span>Notowania</span></a></li>
-        <li class="cal"><a href="{{ path('portfel_history') }}" title=""><span>Kalendarz</span></a></li>
-        <li class="gallery"><a href="{{ path('ulubieni') }}" title=""><span>Obserwowani użytkownicy</span></a></li>
-        <li class="widgets"><a href="{{ path('ustawienia') }}" title="" {% if(app.request.get('_route') == 'ustawienia') %}class="active{% endif %}"><span>Konfiguracja</span></a></li>
-        <li class="errors"><a href="{{ path('komunikaty') }}" title="" class="exp"><span>Komunikaty</span><span class="numberLeft">6</span></a>
+        <li class="cal"><a href="{{ path('kalendarz') }}" title=""><span>Kalendarz</span></a></li>
+        <li class="gallery">
+            <a class="exp" href="{{ path('ulubieni') }}" title="">
+                <span>Obserwowani użytkownicy</span>
+            </a>
             <ul class="sub">
-                <li><a href="403.html" title="">403 page</a></li>
-                <li><a href="404.html" title="">404 page</a></li>
-                <li><a href="405.html" title="">405 page</a></li>
-                <li><a href="500.html" title="">500 page</a></li>
-                <li><a href="503.html" title="">503 page</a></li>
-                <li class="last"><a href="offline.html" title="">Website is offline</a></li>
+                <li><a href="{{ path('ulubieni') }}" title="">Przeglądaj ulubionych</a></li>
+                <li><a href="{{ path('ulubieni_new') }}" title="">Dodaj ulubionego</a></li>
             </ul>
         </li>
+        <li class="widgets"><a href="{{ path('ustawienia') }}" title="" {% if(app.request.get('_route') == 'ustawienia') %}class="active{% endif %}"><span>Konfiguracja</span></a></li>
         <li class="contacts"><a href="{{ path('portfele') }}" title=""><span>Portfele użytkowników</span></a></li>
         <li class="pic"><a href="{{ path('pomoc') }}" title=""><span>Pomoc</span></a></li>
     </ul> 

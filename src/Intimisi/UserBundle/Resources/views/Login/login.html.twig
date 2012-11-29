@@ -7,7 +7,7 @@
         
 {% if error %}
 <div class="nNote nFailure hideit">
-    <p>{{ error|trans([], 'validators') }}</p>
+    <p>{{ error|trans([], 'FOSUserBundle') }}</p>
 </div>
 {% endif %}
 {% if app.session.hasFlash('notice') %}

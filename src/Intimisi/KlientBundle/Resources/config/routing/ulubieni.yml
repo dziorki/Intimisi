@@ -27,4 +27,4 @@ ulubieni_update:
 ulubieni_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "KlientBundle:Ulubieni:delete" }
-    requirements: { _method: post }
+    requirements: { _method: get }

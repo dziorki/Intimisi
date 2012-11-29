@@ -1,0 +1,13 @@
+Intimisi\KlientBundle\Entity\Pomoc:
+  type: entity
+  table: null
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    opis:
+      type: string
+      length: 255
+  lifecycleCallbacks: {  }

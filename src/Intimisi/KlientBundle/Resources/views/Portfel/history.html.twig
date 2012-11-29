@@ -7,32 +7,32 @@
     <div class="head"><h5 class="iFrames">Tabela listy operacji</h5></div>
     <table cellpadding="0" cellspacing="0" width="100%" class="tableStatic">
         <thead>
-        <tr>
-            <td>Id</td>
-            <td>Nazwa</td>
-            <td>Cena</td>
-            <td>Ilosc</td>
-            <td>Prowizja</td>
-            <td>Cena akcji</td>
-            <td>Czas</td>
-            <td>Actions</td>
-        </tr>
-        </thead>
-    <tbody>
-    {% for entity in entities %}
             <tr>
-                <td>{{ loop.index0 + 1 }}</td>
-                <td>{{ entity.nazwa.nazwa }}</td>
-                <td class="right">{{ entity.cena|number_format(2, '.', ',') }}</td>
-                <td class="right">{{ entity.ilosc }}</td>
-                <td class="right">{{ entity.prowizja|number_format(2, '.', ',') }}</td>
-                <td class="right">{{ (entity.ilosc*entity.cena)|number_format(2, '.', ',') }}</td>
-                <td class="center">{% if entity.czas %}{{ entity.czas|date('Y-m-d H:i:s') }}{% endif%}</td>
-                <td class="center"><a href="{{ path('portfel_show', { 'id': entity.id }) }}">pokaż</a> / <a href="{{ path('portfel_edit', { 'id': entity.id }) }}">edytuj</a></td>
+                <td>Id</td>
+                <td>Nazwa</td>
+                <td>Cena</td>
+                <td>Ilosc</td>
+                <td>Prowizja</td>
+                <td>Cena akcji</td>
+                <td>Czas</td>
+                <td>Actions</td>
             </tr>
+        </thead>
+        <tbody>
+    {% for entity in entities %}
+                <tr>
+                    <td>{{ loop.index0 + 1 }}</td>
+                    <td>{{ entity.nazwa.nazwa }}</td>
+                    <td class="right">{{ entity.cena|number_format(2, '.', ',') }}</td>
+                    <td class="right">{{ entity.ilosc }}</td>
+                    <td class="right">{{ entity.prowizja|number_format(2, '.', ',') }}</td>
+                    <td class="right">{{ (entity.ilosc*entity.cena)|number_format(2, '.', ',') }}</td>
+                    <td class="center">{% if entity.czas %}{{ entity.czas|date('Y-m-d H:i:s') }}{% endif%}</td>
+                    <td class="center"><a href="{{ path('portfel_show', { 'id': entity.id }) }}">pokaż</a> / <a href="{{ path('portfel_edit', { 'id': entity.id }) }}">edytuj</a></td>
+                </tr>
     {% endfor %}
-    </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
 
 {% endblock %}

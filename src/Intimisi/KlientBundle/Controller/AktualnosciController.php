@@ -21,7 +21,7 @@ class AktualnosciController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('KlientBundle:Aktualnosci')->findAll();
+        $entities = $em->getRepository('KlientBundle:Aktualnosci')->findBy(array(), array('id' => 'desc'));
 
         return $this->render('KlientBundle:Aktualnosci:index.html.twig', array(
             'entities' => $entities

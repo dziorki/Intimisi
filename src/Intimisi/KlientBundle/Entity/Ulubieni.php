@@ -99,4 +99,11 @@ class Ulubieni
     {
         return $this->opis;
     }
+    
+    public function toArray()
+    {
+        return array(
+            'ulubiony_id' => $this->ulubiony_id
+        );
+    }
 }

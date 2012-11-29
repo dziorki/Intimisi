@@ -40,28 +40,38 @@ $(function () {
             order: 2
         }
     });
-    
-    var data = [
-        {label: 'foo', data: [[1,300], [2,300], [3,300], [4,300], [5,300]]},
-        {label: 'bar', data: [[1,800], [2,600], [3,400], [4,200], [5,0]]},
-        {label: 'baz', data: [[1,100], [2,200], [3,300], [4,400], [5,500]]},
+            var data = [
+        {data: [[1,300], [2,300], [3,300], [4,300]]},
+        {data: [[1,800], [2,600], [3,400], [4,200]]},
+        {data: [[1,100], [2,200], [3,300], [4,400]]},
+        {data: [[1,100], [1,200], [3,300], [3,400]]},
     ];
+    
+    
+    //xaxis: {ticks: [[0,'CDRED'], [1,'ABCDATA']]}        
+        
+        
+    var data = [];
+    var i = 0;
+    var xaxisvar = [];
+    {% for entity in entities %}
+        xaxisvar[{{ loop.index0 }}] = [{{ loop.index0 }},'{{entity.nazwa}}']
+        data[{{ loop.index0 }}] = { data: [[{{ loop.index0 }},{{entity.zysk/100}}]] }
+        i = {{loop.index0}}
+    {% endfor %}
+    {% for entity in entities %}
+        data[{{ loop.index }}+i] = { data: [[{{ loop.index0 }},{{(entity.cena*entity.ilosc/100)}}]] }
+    {% endfor %}
+        
+    
     var options = {
         series: {stack: 0,
                  lines: {show: false, steps: false },
                  bars: {show: true, barWidth: 0.9, align: 'center',},},
                 legend: {
-                        show: true,
-                        noColumns: 1, // number of colums in legend table
-                        labelFormatter: null, // fn: string -> string
-                        labelBoxBorderColor: "#000", // border color for the little label boxes
-                        container: null, // container (as jQuery object) to put legend in, null means default on top of graph
-                        position: "ne", // position of default legend container within plot
-                        margin: [5, 10], // distance from grid edge to default legend container within plot
-                        backgroundColor: "#efefef", // null means auto-detect
-                        backgroundOpacity: 1 // set to 0 to avoid background
+                        show: false
                 },
-        xaxis: {ticks: [[1,'One'], [2,'Two'], [3,'Three'], [4,'Four'], [5,'Five']]},
+        xaxis:  {ticks: xaxisvar},
     };
 
 
@@ -96,7 +106,7 @@ $(function () {
         var data = [];              
         {% for entity in entities %}
             data[{{ loop.index0 }}] = { label: "{{ entity.nazwa }}", data: {{(entity.cena*entity.ilosc)/100}} }
-            {% endfor %}
+        {% endfor %}
 
 $.plot($("#pie"), data, 
 {
@@ -148,7 +158,7 @@ function pieClick(event, pos, obj)
         alert(''+obj.series.label+': '+percent+'%');
 }
 //]]>
-</script>
+    </script>
 
     <div class="title"><h5>Zawartość portfela inwestycyjnego</h5></div>
 
@@ -163,6 +173,9 @@ function pieClick(event, pos, obj)
                     <td>Ilosc</td>
                     <td>Suma prowizji</td>
                     <td>Cena akcji</td>
+                    <td>Zysk/Strata %</td>
+                    <td>Zysk/Strata zł</td>
+                    <td>Podatek zł</td>
                     <td>Akcje</td>
                 </tr>
             </thead>
@@ -175,7 +188,10 @@ function pieClick(event, pos, obj)
                         <td class="right">{{ entity.ilosc }}</td>
                         <td class="right">{{ (entity.prowizja/100)|number_format(2, '.', ',') }}</td>
                         <td class="right">{{ ((entity.cena*entity.ilosc)/100)|number_format(2, '.', ',') }}</td>
-                        <td class="center"><a href="{{ path('portfel_history') }}">pokaż historie</a></td>
+                        <td class="right">{{ (entity.procent)|number_format(2, '.', ',') }}%</td>
+                        <td class="right">{{ (entity.zysk/100)|number_format(2, '.', ',') }}</td>
+                        <td class="right">{{ (entity.zysk/100*0.19)|number_format(2, '.', ',')}}</td>
+                        <td class="center"><a href="{{ path('portfel_history_one', {'id' : entity.nazwa_id}) }}">pokaż historie</a></td>
                     </tr>
         {% endfor %}
                 </tbody>

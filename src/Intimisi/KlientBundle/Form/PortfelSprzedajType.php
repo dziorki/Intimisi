@@ -5,8 +5,6 @@ namespace Intimisi\KlientBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 use Doctrine\ORM\EntityRepository;
-use \Doctrine\Common\Util\Debug;
-use Doctrine\Common\Persistence\ObjectManager;
 
 class PortfelSprzedajType extends AbstractType {
 
@@ -33,7 +31,7 @@ class PortfelSprzedajType extends AbstractType {
                     'attr' => array('class' => 'validate[required,min[0.01]]'),
                 ))
                 ->add('ilosc', 'text', array(
-                    'attr' => array('class' => 'validate[required,custom[integer],min[1],max[5]]'),
+                    //'attr' => array('class' => 'validate[required,custom[integer],min[1],max[5]]'),
                 ))
                 ->add('prowizja', 'text', array(
                     'attr' => array('class' => 'validate[required,min[0]]'),

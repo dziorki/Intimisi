@@ -16,7 +16,7 @@ class Portfel {
     private $id;
 
     /**
-     * @var integer $cena
+     * @var float $cena
      */
     private $cena;
 
@@ -78,7 +78,7 @@ class Portfel {
      * @param integer $ilosc
      */
     public function setIlosc($ilosc) {
-        $this->ilosc = $ilosc;
+        $this->ilosc = str_replace(",", "", $ilosc);
     }
 
     /**
@@ -192,6 +192,12 @@ class Portfel {
         $this->prowizja = 0;
         $this->cena = 0;
         $this->ilosc = 0;
+    }
+    
+    public function jsonSerialize() {
+        return array(
+            'ilosc' => $this->getIlosc()
+        );
     }
 
 }

@@ -58,7 +58,9 @@ class UlubieniController extends Controller
     public function newAction()
     {
         $entity = new Ulubieni();
+        $em = $this->getDoctrine()->getEntityManager();
         $form   = $this->createForm(new UlubieniType(), $entity);
+        
 
         return $this->render('KlientBundle:Ulubieni:new.html.twig', array(
             'entity' => $entity,
@@ -76,13 +78,16 @@ class UlubieniController extends Controller
         $request = $this->getRequest();
         $form    = $this->createForm(new UlubieniType(), $entity);
         $form->bindRequest($request);
-
+        
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
+            
+            $userId = $this->get('security.context')->getToken()->getUser()->getId();
+            $entity->setUserId($userId);
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('ulubieni_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('ulubieni'));
             
         }
 
@@ -162,7 +167,7 @@ class UlubieniController extends Controller
 
         $form->bindRequest($request);
 
-        if ($form->isValid()) {
+//        if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
             $entity = $em->getRepository('KlientBundle:Ulubieni')->find($id);
 
@@ -172,7 +177,7 @@ class UlubieniController extends Controller
 
             $em->remove($entity);
             $em->flush();
-        }
+//        }
 
         return $this->redirect($this->generateUrl('ulubieni'));
     }

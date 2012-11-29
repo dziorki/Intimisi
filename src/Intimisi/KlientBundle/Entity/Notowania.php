@@ -9,8 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="notowania"))
  */
-class Notowania
-{
+class Notowania {
+
     /**
      * @var integer $id
      */
@@ -22,7 +22,7 @@ class Notowania
     private $nazwa;
 
     /**
-     * @var integer $kurs_biezacy
+     * @var float $kurs_biezacy
      */
     private $kurs_biezacy;
 
@@ -76,19 +76,17 @@ class Notowania
      */
     private $portfel;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->portfel = new \Doctrine\Common\Collections\ArrayCollection();
         $this->czas = new \DateTime("now");
     }
-    
+
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -97,8 +95,7 @@ class Notowania
      *
      * @param string $nazwa
      */
-    public function setNazwa($nazwa)
-    {
+    public function setNazwa($nazwa) {
         $this->nazwa = $nazwa;
     }
 
@@ -107,18 +104,16 @@ class Notowania
      *
      * @return string 
      */
-    public function getNazwa()
-    {
+    public function getNazwa() {
         return $this->nazwa;
     }
 
     /**
      * Set kurs_biezacy
      *
-     * @param integer $kursBiezacy
+     * @param float $kursBiezacy
      */
-    public function setKursBiezacy($kursBiezacy)
-    {
+    public function setKursBiezacy($kursBiezacy) {
         $this->kurs_biezacy = $kursBiezacy;
     }
 
@@ -127,8 +122,7 @@ class Notowania
      *
      * @return integer 
      */
-    public function getKursBiezacy()
-    {
+    public function getKursBiezacy() {
         return $this->kurs_biezacy;
     }
 
@@ -137,8 +131,7 @@ class Notowania
      *
      * @param integer $zmianaProcentowa
      */
-    public function setZmianaProcentowa($zmianaProcentowa)
-    {
+    public function setZmianaProcentowa($zmianaProcentowa) {
         $this->zmiana_procentowa = $zmianaProcentowa;
     }
 
@@ -147,8 +140,7 @@ class Notowania
      *
      * @return integer 
      */
-    public function getZmianaProcentowa()
-    {
+    public function getZmianaProcentowa() {
         return $this->zmiana_procentowa;
     }
 
@@ -157,8 +149,7 @@ class Notowania
      *
      * @param integer $zmianaKwotowa
      */
-    public function setZmianaKwotowa($zmianaKwotowa)
-    {
+    public function setZmianaKwotowa($zmianaKwotowa) {
         $this->zmiana_kwotowa = $zmianaKwotowa;
     }
 
@@ -167,8 +158,7 @@ class Notowania
      *
      * @return integer 
      */
-    public function getZmianaKwotowa()
-    {
+    public function getZmianaKwotowa() {
         return $this->zmiana_kwotowa;
     }
 
@@ -177,8 +167,7 @@ class Notowania
      *
      * @param integer $kursOdniesienia
      */
-    public function setKursOdniesienia($kursOdniesienia)
-    {
+    public function setKursOdniesienia($kursOdniesienia) {
         $this->kurs_odniesienia = $kursOdniesienia;
     }
 
@@ -187,8 +176,7 @@ class Notowania
      *
      * @return integer 
      */
-    public function getKursOdniesienia()
-    {
+    public function getKursOdniesienia() {
         return $this->kurs_odniesienia;
     }
 
@@ -197,8 +185,7 @@ class Notowania
      *
      * @param integer $kursOtwarcia
      */
-    public function setKursOtwarcia($kursOtwarcia)
-    {
+    public function setKursOtwarcia($kursOtwarcia) {
         $this->kurs_otwarcia = $kursOtwarcia;
     }
 
@@ -207,8 +194,7 @@ class Notowania
      *
      * @return integer 
      */
-    public function getKursOtwarcia()
-    {
+    public function getKursOtwarcia() {
         return $this->kurs_otwarcia;
     }
 
@@ -217,8 +203,7 @@ class Notowania
      *
      * @param integer $kursMin
      */
-    public function setKursMin($kursMin)
-    {
+    public function setKursMin($kursMin) {
         $this->kurs_min = $kursMin;
     }
 
@@ -227,8 +212,7 @@ class Notowania
      *
      * @return integer 
      */
-    public function getKursMin()
-    {
+    public function getKursMin() {
         return $this->kurs_min;
     }
 
@@ -237,8 +221,7 @@ class Notowania
      *
      * @param integer $kursMax
      */
-    public function setKursMax($kursMax)
-    {
+    public function setKursMax($kursMax) {
         $this->kurs_max = $kursMax;
     }
 
@@ -247,8 +230,7 @@ class Notowania
      *
      * @return integer 
      */
-    public function getKursMax()
-    {
+    public function getKursMax() {
         return $this->kurs_max;
     }
 
@@ -257,8 +239,7 @@ class Notowania
      *
      * @param integer $wolumen
      */
-    public function setWolumen($wolumen)
-    {
+    public function setWolumen($wolumen) {
         $this->wolumen = $wolumen;
     }
 
@@ -267,8 +248,7 @@ class Notowania
      *
      * @return integer 
      */
-    public function getWolumen()
-    {
+    public function getWolumen() {
         return $this->wolumen;
     }
 
@@ -277,8 +257,7 @@ class Notowania
      *
      * @param bigint $obrot
      */
-    public function setObrot($obrot)
-    {
+    public function setObrot($obrot) {
         $this->obrot = $obrot;
     }
 
@@ -287,8 +266,7 @@ class Notowania
      *
      * @return bigint 
      */
-    public function getObrot()
-    {
+    public function getObrot() {
         return $this->obrot;
     }
 
@@ -297,8 +275,7 @@ class Notowania
      *
      * @param datetime $czas
      */
-    public function setCzas($czas)
-    {
+    public function setCzas($czas) {
         $this->czas = $czas;
     }
 
@@ -307,8 +284,7 @@ class Notowania
      *
      * @return datetime 
      */
-    public function getCzas()
-    {
+    public function getCzas() {
         return $this->czas;
     }
 
@@ -317,8 +293,7 @@ class Notowania
      *
      * @param Intimisi\KlientBundle\Entity\Portfel $portfel
      */
-    public function addPortfel(\Intimisi\KlientBundle\Entity\Portfel $portfel)
-    {
+    public function addPortfel(\Intimisi\KlientBundle\Entity\Portfel $portfel) {
         $this->portfel[] = $portfel;
     }
 
@@ -327,8 +302,19 @@ class Notowania
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getPortfel()
-    {
+    public function getPortfel() {
         return $this->portfel;
     }
+
+    /**
+     * json
+     * @return type
+     */
+    public function jsonSerialize() {
+        return array(
+            'kurs_biezacy' => bcdiv($this->kurs_biezacy, 100, 2),
+            'nazwa' => $this->nazwa,
+        );
+    }
+
 }

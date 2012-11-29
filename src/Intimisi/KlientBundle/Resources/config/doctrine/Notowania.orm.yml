@@ -12,7 +12,7 @@ Intimisi\KlientBundle\Entity\Notowania:
       length: 255
       unique: true
     kurs_biezacy:
-      type: integer
+      type: float
     zmiana_procentowa:
       type: integer
     zmiana_kwotowa:
