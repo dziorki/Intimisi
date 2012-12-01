@@ -16,6 +16,8 @@ $(function() {
                 'sLast':     'Ostatnia'
             }
         },
+        "iDisplayLength" : 15,
+        "aLengthMenu" : [ 15, 25, 50, 100 ],
         "bJQueryUI": true,
         "sPaginationType": "full_numbers",
         "sDom": '<""f>t<"F"lp>'
