@@ -3,4 +3,24 @@
 
 <div class="title"><h5>Pomoc</h5></div>
 
+<div class="widget">
+    <ul class="tabs">
+        {% for entity in entities %}
+        <li class="{% if (entity.id == 1) %}activeTab{%endif%}"><a href="#tab{{loop.index}}">{{ entity.tytul}}</a></li>
+        {% endfor %}
+    </ul>
+
+    <div class="tab_container">
+        {% for entity in entities %}
+        <div id="tab{{loop.index}}" class="tab_content" style="display: {% if (entity.id == 1) %}block;{% else %}none;{%endif%} ">
+            
+            <p>{{ entity.opis }}</p></br>
+        </div>
+        {% endfor %}
+        
+    </div>	
+    <div class="fix"></div>		 
+</div>
+
+
 {% endblock %}

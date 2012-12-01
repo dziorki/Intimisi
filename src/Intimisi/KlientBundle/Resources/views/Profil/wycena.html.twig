@@ -1,18 +1,12 @@
 {% extends "::base.html.twig" %} 
 {% block content %}
-
-
 <script type="text/javascript">
 //<![CDATA[
-
-
-
-
 $(function () {
         var data = [];              
         {% for entity in entities %}
             data[{{ loop.index0 }}] = { label: "{{ entity.nazwa }}", data: {{(entity.cena*entity.ilosc)/100}} }
-        {% endfor %}
+            {% endfor %}
 
 $.plot($("#pie"), data, 
 {
@@ -64,52 +58,33 @@ function pieClick(event, pos, obj)
         alert(''+obj.series.label+': '+percent+'%');
 }
 //]]>
-    </script>
+</script>
 
-    <div class="title"><h5>Zawartość portfela inwestycyjnego</h5></div>
+<div class="title"><h5>Wycena portfela</h5></div>
+<div class="widgets">
+    <div class="left">
 
-    <div class="widget">
-        <div class="head"><h5 class="iFrames">Lista akcji</h5></div>
-        <table cellpadding="0" cellspacing="0" width="100%" class="tableStatic">
-            <thead>
-                <tr>
-                    <td>Lp.</td>
-                    <td>Nazwa</td>
-                    <td>Cena zł</td>
-                    <td>Ilosc</td>
-                    <td>Zainwestowany kapitał zł</td>
-                    <td>Kurs akcji zł</td>
-                    <td>Akcje</td>
-                </tr>
-            </thead>
-            <tbody>
-        {% for entity in entities %}
-                    <tr>
-                        <td class="right">{{ loop.index0 + 1 }}</td>
-                        <td>{{ entity.nazwa }}</td>
-                        <td class="right">{{ (entity.cena/100)|number_format(2, '.', ',') }}</td>
-                        <td class="right">{{ entity.ilosc }}</td>
-                        <td class="right">{{ entity.kapital/100 }}</td>
-                        <td class="right">{{ ((entity.kurs_biezacy)/100)|number_format(2, '.', ',') }}</td>
-                        <td class="center"><a href="{{ path('portfel_history_one', {'id' : entity.nazwa_id}) }}">pokaż historie</a></td>
-                    </tr>
-        {% endfor %}
-                </tbody>
-            </table>
+        <div class="widget">
+            <!-- Pie -->                    
+            <div class="head"><h5 class="iChart8">Zawartość portfela</h5></div>
+            <div class="body">                        
+                <div id="pie" class="pieWidget"></div>
+            </div>
+        </div>    
+    </div>
+    <div class="right">
+
+        <div class="widget">
+            <div class="head"><h5 class="iStats">Podsumowanie</h5></div>
+            <div class="body">
+                Aktualnie zainwestowany kapitał: {{ podsumowanie.kapital/100 }} PLN<br/>
+                Ilość jednostek posiadanych walorów: {{ podsumowanie.ilosc }}<br/>
+                Łączna wartość posiadanych walorów: {{ podsumowanie.wartosc/100 }} PLN<br/>
+                Zysk z walorów (po odliczeniu prowizji): {{ podsumowanie.zysk/100 }} PLN<br/>
+                
+                <br/>
+            </div>
         </div>
-
-        <div class="widgets">            
-
-            <div class="center">                
-                <div class="widget">
-                    <!-- Pie -->                    
-                    <div class="head"><h5 class="iChart8">Zawartość portfela</h5></div>
-                    <div class="body">                        
-                        <div id="pie" class="pieWidget"></div>
-                    </div>
-                </div>
-            </div>            
-            <div class="fix"></div>
-        </div>
-
+    </div>
+</div>
 {% endblock %}

@@ -30,11 +30,15 @@ class ProfilController extends Controller {
 
     public function statystykiAction() {
         $em = $this->getDoctrine()->getEntityManager();
+
         $this->_userId = $this->get('security.context')->getToken()->getUser()->getId();
         $entities = $em->getRepository('KlientBundle:Portfel')->findAllGrouped($this->_userId);
 
+        $hBar = $em->getRepository('KlientBundle:Portfel')->hBarPortfel($this->_userId);
+
         return $this->render('KlientBundle:Profil:statystyki.html.twig', array(
-            'entities' => $entities));
+            'entities' => $entities,
+            'hBar' => $hBar));
 
         
     }

@@ -5,7 +5,7 @@
 <fieldset>
     <div class="widget">
         <div class="head">
-            <h5 class="iLocked2">Konfiguracja</h5>
+            <h5 class="iArchive">Pokaż</h5>
         </div>                    
         <div class="rowElem">
             <label>Nazwa:</label>
@@ -35,13 +35,19 @@
             </div>                        
             <div class="fix"></div>
         </div>
+        <div class="rowElem">
+            <label>Czas zawarcia transakcji:</label>
+            <div class="formRight">
+            {{ entity.czas|date('Y-m-d H:i:s') }}
+            </div>                        
+            <div class="fix"></div>
+        </div>
         <div class="submitForm">
             
             
         <form action="{{ path('portfel_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
             <a href="{{ path('portfel_history') }}"><button class="greyishBtn">Cofnij</button></a>
-            <a href="{{ path('portfel_edit', { 'id': entity.id }) }}"><button class="greenBtn">Edytuj</button></a>
             <button type="submit" class="redBtn">Usuń</button>
         </form>
             

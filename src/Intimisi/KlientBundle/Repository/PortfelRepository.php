@@ -22,16 +22,38 @@ class PortfelRepository extends EntityRepository {
             SELECT sum(p.cena),
             c.id as nazwa_id,
             c.nazwa, 
+            c.kurs_biezacy,
             sum(p.cena) cena, 
+            sum(p.cena*p.ilosc) kapital,
             sum(p.ilosc) ilosc, 
             sum(p.prowizja) prowizja, sum((c.kurs_biezacy*p.ilosc)-(p.cena*p.ilosc)-p.prowizja) as zysk, 
             sum((c.kurs_biezacy/(p.cena+p.prowizja))*100)-100 as procent
             FROM KlientBundle:Portfel p 
             JOIN p.nazwa c
             WHERE p.user_id = :user_id
-            GROUP BY c.id, c.nazwa ORDER BY c.nazwa'
+            GROUP BY c.id, c.nazwa, c.kurs_biezacy ORDER BY c.nazwa'
                 )->setParameter('user_id', $user_id);
         return $query->getResult();
+    }
+    
+    /**
+     * Lista akcji zsumowanych
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function podsumowanie($user_id) {
+        $query = $this->_em->createQuery('
+            SELECT 
+            sum(p.cena*p.ilosc) kapital, 
+            sum(p.ilosc) ilosc,
+            sum(c.kurs_biezacy*p.ilosc) as wartosc, 
+            sum(p.prowizja) prowizja, sum((c.kurs_biezacy*p.ilosc)-(p.cena*p.ilosc)-p.prowizja) as zysk, 
+            sum((c.kurs_biezacy/(p.cena+p.prowizja))*100)-100 as procent
+            FROM KlientBundle:Portfel p 
+            JOIN p.nazwa c
+            WHERE p.user_id = :user_id'
+                )->setParameter('user_id', $user_id);
+        return $query->getSingleResult();
     }
     
    public function getAkcja($user_id, $id) {

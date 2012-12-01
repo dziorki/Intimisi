@@ -3,87 +3,104 @@
 <script type="text/javascript">
 //<![CDATA[
 $(function () {
-        var data = [];              
-        {% for entity in entities %}
-            data[{{ loop.index0 }}] = { label: "{{ entity.nazwa }}", data: {{(entity.cena*entity.ilosc)/100}} }
-            {% endfor %}
 
-$.plot($("#pie"), data, 
-{
-                series: {
-                        pie: { 
-                                show: true,
-                                label: {
-                                        show: false,
-                                        formatter: function(label, series){
-                                                return '<div style="font-size:11px;text-align:center;padding:4px;color:white;">'+label+'<br/>'+Math.round(series.percent)+'%</div>';
-                                        },
-                                        threshold: 0.1
-                                }
-                        }
-                },
-                legend: {
-                        show: true,
-                        noColumns: 1, // number of colums in legend table
-                        labelFormatter: null, // fn: string -> string
-                        labelBoxBorderColor: "#000", // border color for the little label boxes
-                        container: null, // container (as jQuery object) to put legend in, null means default on top of graph
-                        position: "ne", // position of default legend container within plot
-                        margin: [5, 10], // distance from grid edge to default legend container within plot
-                        backgroundColor: "#efefef", // null means auto-detect
-                        backgroundOpacity: 1 // set to 0 to avoid background
-                },
-                grid: {
-                        hoverable: true,
-                        clickable: true
-                },
+    var data = [
+        {data: [[1,300], [2,300], [3,300], [4,300]]},
+        {data: [[1,800], [2,600], [3,400], [4,200]]},
+        {data: [[1,100], [2,200], [3,300], [4,400]]},
+        {data: [[1,100], [1,200], [3,300], [3,400]]},
+    ];
+        
+    var data = [];
+    var i = 0;
+    var xaxisvar = [];
+    {% for entity in entities %}
+        xaxisvar[{{ loop.index0 }}] = [{{ loop.index0 }},'{{entity.nazwa}}']
+        data[{{ loop.index0 }}] = { data: [[{{ loop.index0 }},{{entity.zysk/100}}]] }
+        i = {{loop.index0}}
+    {% endfor %}
+    {% for entity in entities %}
+        data[{{ loop.index }}+i] = { data: [[{{ loop.index0 }},{{(entity.cena*entity.ilosc/100)}}]] }
+    {% endfor %}
+        
+    
+    var options = {
+        series: {
+            stack: true,
+            lines: {
+                show: false, 
+                steps: false
+            },
+            bars: {
+                show: true, 
+                barWidth: 0.9, 
+                align: 'center',
+                horizontal: false,
+                //order:2
+            }
+        },
+        legend: {
+            show: false
+        },
+        xaxis:  {
+            ticks: xaxisvar
+        },
+    };
+
+
+    $.plot($("#hBar"), data, options);
 });
-$("#interactive").bind("plothover", pieHover);
-$("#interactive").bind("plotclick", pieClick);
-
-});
-
-function pieHover(event, pos, obj) 
-{
-        if (!obj)
-                                return;
-        percent = parseFloat(obj.series.percent).toFixed(2);
-        $("#hover").html('<span style="font-weight: bold; color: '+obj.series.color+'">'+obj.series.label+' ('+percent+'%)</span>');
-}
-function pieClick(event, pos, obj) 
-{
-        if (!obj)
-                                return;
-        percent = parseFloat(obj.series.percent).toFixed(2);
-        alert(''+obj.series.label+': '+percent+'%');
-}
 //]]>
 </script>
 
 <div class="title"><h5>Kalkulator zysków i strat</h5></div>
-<div class="widgets">
-    <div class="left">
-
-        <div class="widget">
-            <!-- Pie -->                    
-            <div class="head"><h5 class="iChart8">Zawartość portfela</h5></div>
-            <div class="body">                        
-                <div id="pie" class="pieWidget"></div>
-            </div>
-        </div>    
+    <div class="widget">
+        <div class="head"><h5 class="iFrames">Lista akcji</h5></div>
+        <table cellpadding="0" cellspacing="0" width="100%" class="tableStatic">
+            <thead>
+                <tr>
+                    <td>Lp.</td>
+                    <td>Nazwa</td>
+                    <td>Wartość</td>
+                    <td>Ilość</td>
+                    <td>Suma prowizji</td>
+                    <td>Cena akcji</td>
+                    <td>Zysk/Strata %</td>
+                    <td>Zysk/Strata zł</td>
+                    <td>Podatek zł</td>
+                    <td>Akcje</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entity in entities %}
+                <tr>
+                    <td class="right">{{ loop.index0 + 1 }}</td>
+                    <td>{{ entity.nazwa }}</td>
+                    <td class="right">{{ (entity.cena/100)|number_format(2, '.', ',') }}</td>
+                    <td class="right">{{ entity.ilosc }}</td>
+                    <td class="right">{{ (entity.prowizja/100)|number_format(2, '.', ',') }}</td>
+                    <td class="right">{{ ((entity.cena*entity.ilosc)/100)|number_format(2, '.', ',') }}</td>
+                    <td class="right">{{ (entity.procent)|number_format(2, '.', ',') }}%</td>
+                    <td class="right">{{ (entity.zysk/100)|number_format(2, '.', ',') }}</td>
+                    <td class="right">{{ (entity.zysk/100*0.19)|number_format(2, '.', ',')}}</td>
+                    <td class="center"><a href="{{ path('portfel_history_one', {'id' : entity.nazwa_id}) }}">pokaż historie</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-    <div class="right">
 
-        <div class="widget">
-            <div class="head"><h5 class="iStats">Podsumowanie</h5></div>
-            <div class="body">
-                Aktualnie posiadany kapitał: 13,53 PLN<br/>
-                Łączna wartość posiadanych walorów: 27,02 PLN<br/>
-                Zysk z dotychczas sprzedanych walorów: 0,00 PLN<br/>
-                Łączny zysk od początku inwestowania: 13,49 PLN
-                <br/>
+    <div class="widgets">            
+        <div class="center">                
+            <div class="widget">
+                <!-- Horizontal -->                    
+                <div class="head"><h5 class="iStats">Zyski / Straty</h5></div>
+                <div class="body">
+                    <div id="hBar" class="pieWidget"></div>
+                </div>                
             </div>
-        </div>
+        </div>           
+        <div class="fix"></div>
     </div>
-</div>
+
 {% endblock %}
