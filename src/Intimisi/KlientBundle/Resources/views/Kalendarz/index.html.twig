@@ -36,7 +36,8 @@ $(document).ready(function(){
             
             start: new Date({{ entity.czas|date('Y, m-1, d, H, i, s') }}),
             end: new Date({{ entity.czas|date('Y, m-1, d, H, i, s') }}),
-            allDay: true
+            allDay: true,
+            url: '{{ path('portfel_show', {'id' : entity.id}) }}'
         },
 
         {% endfor %}   
