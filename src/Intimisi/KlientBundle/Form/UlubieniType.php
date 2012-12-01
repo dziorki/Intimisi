@@ -18,7 +18,7 @@ class UlubieniType extends AbstractType
                     'query_builder' =>
                     function(EntityRepository $er) {
                         return $er->createQueryBuilder('u')
-                                ->where('u.ustawieniaPrywatnosci = true');
+                                ->where('u.ustawieniaPrywatnosci = false');
                     }))
             ->add('opis','text')
         ;
